@@ -75,14 +75,36 @@ const beerToRating = {
 
 //send a request to OMDB and parse response
 
+// var authKey ="4d1ad40435947a343ddbc3ef02f71d77";
+
+// create function taht renders movie details
+
+var queryURLBase = "http://www.omdbapi.com/?";
+
+
+
+
+$.ajax({url: queryURLBase, method:"GET"})
+.done(function(response) {
+
+//call movie detail function 
+
+//stored desired paramters in vars
+
+	response.plot
+	console.log(response);
+});
+
+//create another function that will make ajax call 
+// to beer and pass those vars ars arguments
 
 
 
 //response from OMDB will need to be operated on to map it to a specific beer style.
-    //heavier beer for worse movies. Better movies, Lighter beer.
+//heavier beer for worse movies. Better movies, Lighter beer.
 
 
-    //
+ 
 
 
 
