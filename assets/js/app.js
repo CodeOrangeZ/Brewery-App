@@ -96,8 +96,6 @@ $.ajax({url: movieUrl, method:"GET"})
 	console.log(response);
 });
 
-<<<<<<< HEAD
-
 // results returned above
 // jquery creation below
 // movie api
@@ -113,11 +111,8 @@ $.ajax({url: movieUrl, method:"GET"})
 
 
 //create another function that will make ajax call
-// to beer and pass those vars ars arguments
-=======
-//create another function that will make ajax call
 // to beer and pass those vars as arguments
->>>>>>> fa87499974659731798e425556dcef7f4985febd
+
 
 
 
