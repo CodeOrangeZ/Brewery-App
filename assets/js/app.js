@@ -79,6 +79,7 @@ const beerToRating = {
 
 // create function taht renders movie details
 
+
 // ajax is stored in a variable with movieurl and call back arguements 
 var movieJax = function(movieUrl, cb){
   $.ajax({url: movieUrl, method:"GET"})
@@ -97,7 +98,6 @@ var movieJax = function(movieUrl, cb){
   });
 }
 
-<<<<<<< HEAD
 
 // results returned above
 // jquery creation below
@@ -114,7 +114,9 @@ var movieJax = function(movieUrl, cb){
 
 
 //create another function that will make ajax call
-// to beer and pass those vars ars arguments
+
+// to beer and pass those vars as arguments
+
 
 
 
@@ -122,10 +124,11 @@ var movieJax = function(movieUrl, cb){
 //heavier beer for worse movies. Better movies, Lighter beer.
 /**
   * Function for extracting the appropriate beer based on ratings
-  * @param "beerMap" object - The object we use for holding the beer values
-  * @param "rate" number - the rating value we recieve from the OMBD api
+  * @param "beerMap" {object} - The object we use for holding the beer values
+  * @param "rate" {number} - the rating value we recieve from the OMBD api
+  * @return {object} - the object stored at
   */
-let extractStyle = (beerMap, rate) => {
+let extractStyle = function(beerMap, rate) {
   for(key in beerMap) {
     if(beerMap[key].rating_min <= rate <= beerMap[key].rating_max) {
       return beerMap[key];
@@ -138,13 +141,21 @@ var beerSearchParams = {
   key: breweryAPIKey,
   order: "random",
   styleId: queryStyleId,
-  hasLabels: "Y"
+  //hasLabels: "Y"
 };
 
 
 //send request to breweryDB for specific beer style.
-breweryUrl+=$.param(beerSearchParams);
-let brewJax = (breweryUrl) => {
+breweryUrl += $.param(beerSearchParams);
+
+/**
+  * Function for extracting the appropriate beer based on ratings
+  * @param "breweryUrl" {string} - Url for api call
+  * @param "cb" {function} - callback to call on response
+  * @return {void}
+  */
+
+let brewJax = function(breweryUrl, cb) {
   $.ajax({
     url:breweryUrl,
     method: "GET",
@@ -154,7 +165,16 @@ let brewJax = (breweryUrl) => {
   //  }
   })
   .done(function(res){
-    console.log(res);
+    var beerRes = {};
+    var styleRes = {};
+    var r = res.data[0];
+    beerRes.name = r.name;
+    beerRes.description = r.description;
+    beerRes.abv = r.abv || "No Abv Data";
+    beerRes.labels = r.labels;
+    styleRes = r.style;
+
+    cb(beerRes, styleRes);
   })
 }
 
