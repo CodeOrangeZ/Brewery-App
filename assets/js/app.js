@@ -7,6 +7,7 @@ var movieUrl = "http://www.omdbapi.com/?";//API key not necessary
 var movieObj = {};
 var breweryUrl = "http://api.brewerydb.com/v2/beers/?"; //this is the base, the API endpoint will need to be specified
 var breweryAPIKey = "a2bbeb0349946cb230fb7cc9a584a5a4";
+
 const beerToRating = {
   "American Style Premium Lager" : {
         beerStyleId: 97,
@@ -76,28 +77,27 @@ const beerToRating = {
 
 //send a request to OMDB and parse response
 
-// var authKey ="4d1ad40435947a343ddbc3ef02f71d77";
 
 // create function taht renders movie details
 
 
 
 
-// $.ajax({url: movieUrl, method:"GET"})
-// .done(function(response) {
-//
-// //call movie detail function
-//
-// //stored desired paramters in vars
-// 	movieObj.title = response.title;
-// 	movieObj.poster = response.poster;
-// 	movieObj.plot = response.plot;
-// 	movieObj.rating = response.rating;
-// 	console.log(response);
-// });
+$.ajax({url: movieUrl, method:"GET"})
+.done(function(response) {
+
+//call movie detail function
+
+//stored desired paramters in vars
+	movieObj.title = response.title;
+	movieObj.poster = response.poster;
+	movieObj.plot = response.plot;
+	movieObj.rating = response.rating;
+	console.log(response);
+});
 
 //create another function that will make ajax call
-// to beer and pass those vars ars arguments
+// to beer and pass those vars as arguments
 
 
 
@@ -105,7 +105,7 @@ const beerToRating = {
 //heavier beer for worse movies. Better movies, Lighter beer.
 /**
   * Function for extracting the appropriate beer based on ratings
-  * @param "beerMap" object - The object we use for holding the values
+  * @param "beerMap" object - The object we use for holding the beer values
   * @param "rate" number - the rating value we recieve from the OMBD api
   */
 let extractStyle = (beerMap, rate) => {
@@ -130,9 +130,10 @@ let brewJax = (breweryUrl) => {
   $.ajax({
     url:breweryUrl,
     method: "GET",
-    xhrFields: {
-      withCredentials: true
-   }
+  //   crossDomain : true,
+  //   xhrFields: {
+  //     withCredentials: true
+  //  }
   })
   .done(function(res){
     console.log(res);
