@@ -4,7 +4,6 @@
   */
 
 var movieUrl = "http://www.omdbapi.com/?";//API key not necessary
-var movieObj = {};
 var breweryUrl = "http://api.brewerydb.com/v2/beers/?"; //this is the base, the API endpoint will need to be specified
 var breweryAPIKey = "a2bbeb0349946cb230fb7cc9a584a5a4";
 
@@ -81,25 +80,31 @@ const beerToRating = {
 // create function taht renders movie details
 
 
-$.ajax({url: movieUrl, method:"GET"})
-.done(function(response, cb) {
+// ajax is stored in a variable with movieurl and call back arguements 
+var movieJax = function(movieUrl, cb){
+  $.ajax({url: movieUrl, method:"GET"})
+// response and call back are passed as arguments in done function
+    .done(function(response, cb) {
 
-//call movie detail function
+    //call movie detail function
 
-//stored desired paramters in vars
-	movieObj.title = response.title;
-	movieObj.poster = response.poster;
-	movieObj.plot = response.plot;
-	movieObj.rating = response.rating;
-	cb(movieObj);
-});
+    //stored desired paramters in vars
+    	movieObj.title = response.title;
+    	movieObj.poster = response.poster;
+    	movieObj.plot = response.plot;
+    	movieObj.rating = response.rating;
+    	
+      cb(movieObj);
+  });
+}
+
 
 // results returned above
 // jquery creation below
 // movie api
-// $(<h1>).html(movieTitle);
-// $(<img>).attr( src, moviePoster);
-// $(<p>).html(shortPlot); // displayed on modal
+// $(<h1>).html(movieJax.title);
+// $(<img>).attr( src, movieJax.poster);
+// $(<p>).html(movieJax.plot); // displayed on modal
 // // beer api
 // $(<h1>).html(beerType);
 // $(<beer divs go here>).beer(beer css and stuff with response beer type as the color);
@@ -109,6 +114,7 @@ $.ajax({url: movieUrl, method:"GET"})
 
 
 //create another function that will make ajax call
+
 // to beer and pass those vars as arguments
 
 
@@ -138,11 +144,7 @@ var beerSearchParams = {
   //hasLabels: "Y"
 };
 
-<<<<<<< HEAD
 
-
-
-=======
 //send request to breweryDB for specific beer style.
 breweryUrl += $.param(beerSearchParams);
 
@@ -175,11 +177,6 @@ let brewJax = function(breweryUrl, cb) {
     cb(beerRes, styleRes);
   })
 }
->>>>>>> fa87499974659731798e425556dcef7f4985febd
-
-
-
-
 
 
 //send data to controller/middleware logic.
