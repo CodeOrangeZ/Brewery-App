@@ -87,7 +87,7 @@ var queryURLBase = "http://www.omdbapi.com/?";
 $.ajax({url: queryURLBase, method:"GET"})
 .done(function(response) {
 
-//call movie detail function 
+//call movie detail function
 
 //stored desired paramters in vars
 
@@ -95,7 +95,22 @@ $.ajax({url: queryURLBase, method:"GET"})
 	console.log(response);
 });
 
-//create another function that will make ajax call 
+
+// results returned above
+// jquery creation below
+// movie api
+// $(<h1>).html(movieTitle);
+// $(<img>).attr( src, moviePoster);
+// $(<p>).html(shortPlot); // displayed on modal
+// // beer api
+// $(<h1>).html(beerType);
+// $(<beer divs go here>).beer(beer css and stuff with response beer type as the color);
+// $(<p>).html(beerDescription) //displayed on modal
+
+// append all of the things to results div
+
+
+//create another function that will make ajax call
 // to beer and pass those vars ars arguments
 
 
@@ -104,7 +119,7 @@ $.ajax({url: queryURLBase, method:"GET"})
 //heavier beer for worse movies. Better movies, Lighter beer.
 
 
- 
+
 
 
 
