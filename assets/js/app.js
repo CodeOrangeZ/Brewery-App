@@ -4,7 +4,6 @@
   */
 
 var movieUrl = "http://www.omdbapi.com/?";//API key not necessary
-var movieObj = {};
 var breweryUrl = "http://api.brewerydb.com/v2/beers/?"; //this is the base, the API endpoint will need to be specified
 var breweryAPIKey = "a2bbeb0349946cb230fb7cc9a584a5a4";
 
@@ -82,19 +81,20 @@ const beerToRating = {
 
 
 
+movieJax function(){
+  $.ajax({url: movieUrl, method:"GET"})
+    .done(function(response, cb) {
 
-$.ajax({url: movieUrl, method:"GET"})
-.done(function(response) {
+    //call movie detail function
 
-//call movie detail function
-
-//stored desired paramters in vars
-	movieObj.title = response.title;
-	movieObj.poster = response.poster;
-	movieObj.plot = response.plot;
-	movieObj.rating = response.rating;
-	console.log(response);
-});
+    //stored desired paramters in vars
+    	movieObj.title = response.title;
+    	movieObj.poster = response.poster;
+    	movieObj.plot = response.plot;
+    	movieObj.rating = response.rating;
+    	cb(movieObj);
+  });
+}
 
 <<<<<<< HEAD
 
