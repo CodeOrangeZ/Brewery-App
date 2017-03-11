@@ -3,10 +3,6 @@
   * this file so far a has mostly the back-end logic, middleware and front end
   */
 
-var movieUrl = "http://www.omdbapi.com/?";//API key not necessary
-var breweryUrl = "http://api.brewerydb.com/v2/beers/?"; //this is the base, the API endpoint will need to be specified
-var breweryAPIKey = "a2bbeb0349946cb230fb7cc9a584a5a4";
-
 const beerToRating = {
   "American Style Premium Lager" : {
         beerStyleId: 97,
@@ -81,52 +77,26 @@ const beerToRating = {
 
 
 // ajax is stored in a variable with movieurl and call back arguements
-var movieJax = function(movieUrl, cb){
+var movieJax = function(movie, cb){
+  var movieUrl = "http://www.omdbapi.com/?";//API key not necessary
+  var movieParam = {
+    t: movie,
+  };
+  movieUrl += $.param(movieParam);
   $.ajax({url: movieUrl, method:"GET"})
 // response and call back are passed as arguments in done function
-    .done(function(response, cb) {
-
+    .done(function(response) {
     //call movie detail function
-
+    var movieObj = {};
     //stored desired paramters in vars
-    	movieObj.title = response.title;
-    	movieObj.poster = response.poster;
-    	movieObj.plot = response.plot;
-    	movieObj.rating = response.rating;
+    	movieObj.title = response.Title;
+    	movieObj.posterURL = response.Poster;
+    	movieObj.plot = response.Plot;
+    	movieObj.rating = parseFloat(response.imdbRating);
 
       cb(movieObj);
-
-      // results returned above
-      // jquery creation below
-      // movie api
-      // $(<h1>).html(movieObj.title);
-      // $(<img>).attr( src, id, movieObj.poster);
-      // $(<p>).html(movieObj.plot); // displayed on modal
   });
 }
-
-
-// results returned above
-// jquery creation below
-// movie api
-// $(<h1>).html(movieObj.title);
-// $(<img>).attr( src, movieObj.poster);
-// $(<p>).html(movieObj.plot); // displayed on modal
-// beer api
-
-
-// $(<h1>).html(beerRes.style);
-// $(<beer divs go here>).beer(beer css and stuff with response beer type as the color);
-// $(<p>).html(beerRes.description) //displayed on modal
-
-// append all of the things to results div
-
-
-//create another function that will make ajax call
-
-// to beer and pass those vars as arguments
-
-
 
 
 //response from OMDB will need to be operated on to map it to a specific beer style.
@@ -144,18 +114,7 @@ let extractStyle = function(beerMap, rate) {
     }
   };
 }
-var beerObj = extractStyle(beerToRating, 4.5);
-var queryStyleId = beerObj.beerStyleId;
-var beerSearchParams = {
-  key: breweryAPIKey,
-  order: "random",
-  styleId: queryStyleId,
-  //hasLabels: "Y"
-};
 
-
-//send request to breweryDB for specific beer style.
-breweryUrl += $.param(beerSearchParams);
 
 /**
   * Function for extracting the appropriate beer based on ratings
@@ -164,7 +123,19 @@ breweryUrl += $.param(beerSearchParams);
   * @return {void}
   */
 
-let brewJax = function(breweryUrl, cb) {
+let brewJax = function(rating, cb) {
+  var breweryUrl = "http://api.brewerydb.com/v2/beers/?"; //this is the base, the API endpoint will need to be specified
+  var breweryAPIKey = "a2bbeb0349946cb230fb7cc9a584a5a4";
+  var beerObj = extractStyle(beerToRating, rating);
+  var queryStyleId = beerObj.beerStyleId;
+  var beerSearchParams = {
+    key: breweryAPIKey,
+    order: "random",
+    styleId: queryStyleId,
+    //hasLabels: "Y"
+  };
+  //send request to breweryDB for specific beer style.
+  breweryUrl += $.param(beerSearchParams);
   $.ajax({
     url:breweryUrl,
     method: "GET",
@@ -184,12 +155,6 @@ let brewJax = function(breweryUrl, cb) {
     styleRes = r.style;
 
     cb(beerRes, styleRes);
-
-    // CONTROL LOGIC
-    // $(<h1>).html(beerRes.style);
-    // $(<beer divs go here>).beer(beer css and stuff with response beer type as the color);
-    // $(beer div).attr(id, beerRes.style)
-    // $(<p>).html(beerRes.description) //displayed on modal
 
 
   })
@@ -214,9 +179,6 @@ let brewJax = function(breweryUrl, cb) {
 
 $("#movieSubmit").on("click", function(event){
     event.preventDefault();
-    movieUrl += $("#movieTitle").val().trim();
-    $.ajax({url: movieUrl, method:"GET"})
-     .done(function(response) {
-     console.log(response);
-   })
+    var mov = $("#movieTitle").val().trim();
+    movieJax(mov, console.log);
 });
