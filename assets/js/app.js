@@ -79,10 +79,10 @@ const beerToRating = {
 
 // create function taht renders movie details
 
-
-
-movieJax function(){
+// ajax is stored in a variable with movieurl and call back arguements 
+var movieJax = function(movieUrl, cb){
   $.ajax({url: movieUrl, method:"GET"})
+// response and call back are passed as arguments in done function
     .done(function(response, cb) {
 
     //call movie detail function
@@ -92,7 +92,8 @@ movieJax function(){
     	movieObj.poster = response.poster;
     	movieObj.plot = response.plot;
     	movieObj.rating = response.rating;
-    	cb(movieObj);
+    	
+      cb(movieObj);
   });
 }
 
@@ -101,9 +102,9 @@ movieJax function(){
 // results returned above
 // jquery creation below
 // movie api
-// $(<h1>).html(movieTitle);
-// $(<img>).attr( src, moviePoster);
-// $(<p>).html(shortPlot); // displayed on modal
+// $(<h1>).html(movieJax.title);
+// $(<img>).attr( src, movieJax.poster);
+// $(<p>).html(movieJax.plot); // displayed on modal
 // // beer api
 // $(<h1>).html(beerType);
 // $(<beer divs go here>).beer(beer css and stuff with response beer type as the color);
@@ -114,10 +115,6 @@ movieJax function(){
 
 //create another function that will make ajax call
 // to beer and pass those vars ars arguments
-=======
-//create another function that will make ajax call
-// to beer and pass those vars as arguments
->>>>>>> fa87499974659731798e425556dcef7f4985febd
 
 
 
@@ -144,11 +141,7 @@ var beerSearchParams = {
   hasLabels: "Y"
 };
 
-<<<<<<< HEAD
 
-
-
-=======
 //send request to breweryDB for specific beer style.
 breweryUrl+=$.param(beerSearchParams);
 let brewJax = (breweryUrl) => {
@@ -164,11 +157,6 @@ let brewJax = (breweryUrl) => {
     console.log(res);
   })
 }
->>>>>>> fa87499974659731798e425556dcef7f4985febd
-
-
-
-
 
 
 //send data to controller/middleware logic.
