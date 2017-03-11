@@ -211,3 +211,14 @@ let brewJax = function(breweryUrl, cb) {
   * This will operate on the data for adding css classes.
   * changing elements, etc
   */
+
+
+$("#movieSubmit").on("click", function(event){
+    event.preventDefault();
+    movieUrl += $("#movieTitle").val().trim();
+    $.ajax({url: movieUrl, method:"GET"})
+     .done(function(response) {
+     console.log(response);
+   })
+});
+
