@@ -89,7 +89,7 @@ $.ajax({url: queryURLBase, method:"GET"})
 //call movie detail function 
 
 //stored desired paramters in vars
-	movieObj,title = response.title;
+	movieObj.title = response.title;
 	movieObj.poster = response.poster;
 	movieObj.plot = response.plot;
 	movieObj.rating = response.rating;
