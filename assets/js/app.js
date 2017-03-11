@@ -212,6 +212,7 @@ let brewJax = function(breweryUrl, cb) {
   * changing elements, etc
   */
 
+
 $("#movieSubmit").on("click", function(event){
     event.preventDefault();
     movieUrl += $("#movieTitle").val().trim();
@@ -220,3 +221,4 @@ $("#movieSubmit").on("click", function(event){
      console.log(response);
    })
 });
+
