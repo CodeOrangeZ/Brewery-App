@@ -82,7 +82,7 @@ const beerToRating = {
 
 
 $.ajax({url: movieUrl, method:"GET"})
-.done(function(response) {
+.done(function(response, cb) {
 
 //call movie detail function
 
@@ -91,7 +91,7 @@ $.ajax({url: movieUrl, method:"GET"})
 	movieObj.poster = response.poster;
 	movieObj.plot = response.plot;
 	movieObj.rating = response.rating;
-	console.log(movieObj);
+	cb(movieObj);
 });
 
 //create another function that will make ajax call
@@ -103,8 +103,9 @@ $.ajax({url: movieUrl, method:"GET"})
 //heavier beer for worse movies. Better movies, Lighter beer.
 /**
   * Function for extracting the appropriate beer based on ratings
-  * @param "beerMap" object - The object we use for holding the beer values
-  * @param "rate" number - the rating value we recieve from the OMBD api
+  * @param "beerMap" {object} - The object we use for holding the beer values
+  * @param "rate" {number} - the rating value we recieve from the OMBD api
+  * @return {object} - the object stored at
   */
 let extractStyle = function(beerMap, rate) {
   for(key in beerMap) {
@@ -117,14 +118,22 @@ var beerObj = extractStyle(beerToRating, 4.5);
 var queryStyleId = beerObj.beerStyleId;
 var beerSearchParams = {
   key: breweryAPIKey,
-  //order: "random",
+  order: "random",
   styleId: queryStyleId,
   //hasLabels: "Y"
 };
 
 //send request to breweryDB for specific beer style.
-breweryUrl+=$.param(beerSearchParams);
-let brewJax = function(breweryUrl) {
+breweryUrl += $.param(beerSearchParams);
+
+/**
+  * Function for extracting the appropriate beer based on ratings
+  * @param "breweryUrl" {string} - Url for api call
+  * @param "cb" {function} - callback to call on response
+  * @return {void}
+  */
+
+let brewJax = function(breweryUrl, cb) {
   $.ajax({
     url:breweryUrl,
     method: "GET",
@@ -134,7 +143,16 @@ let brewJax = function(breweryUrl) {
   //  }
   })
   .done(function(res){
-    console.log(res);
+    var beerRes = {};
+    var styleRes = {};
+    var r = res.data[0];
+    beerRes.name = r.name;
+    beerRes.description = r.description;
+    beerRes.abv = r.abv || "No Abv Data";
+    beerRes.labels = r.labels;
+    styleRes = r.style;
+
+    cb(beerRes, styleRes);
   })
 }
 
