@@ -100,7 +100,7 @@ var movieJax = function(movieUrl, cb){
       // jquery creation below
       // movie api
       // $(<h1>).html(movieObj.title);
-      // $(<img>).attr( src, movieObj.poster);
+      // $(<img>).attr( src, id, movieObj.poster);
       // $(<p>).html(movieObj.plot); // displayed on modal
   });
 }
@@ -188,6 +188,7 @@ let brewJax = function(breweryUrl, cb) {
     // CONTROL LOGIC
     // $(<h1>).html(beerRes.style);
     // $(<beer divs go here>).beer(beer css and stuff with response beer type as the color);
+    // $(beer div).attr(id, beerRes.style)
     // $(<p>).html(beerRes.description) //displayed on modal
 
 
@@ -210,3 +211,5 @@ let brewJax = function(breweryUrl, cb) {
   * This will operate on the data for adding css classes.
   * changing elements, etc
   */
+
+  var
