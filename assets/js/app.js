@@ -81,10 +81,8 @@ const beerToRating = {
 // create function taht renders movie details
 
 
-
-
 $.ajax({url: movieUrl, method:"GET"})
-.done(function(response) {
+.done(function(response, cb) {
 
 //call movie detail function
 
@@ -93,7 +91,7 @@ $.ajax({url: movieUrl, method:"GET"})
 	movieObj.poster = response.poster;
 	movieObj.plot = response.plot;
 	movieObj.rating = response.rating;
-	console.log(response);
+	cb(movieObj);
 });
 
 // results returned above
@@ -120,10 +118,11 @@ $.ajax({url: movieUrl, method:"GET"})
 //heavier beer for worse movies. Better movies, Lighter beer.
 /**
   * Function for extracting the appropriate beer based on ratings
-  * @param "beerMap" object - The object we use for holding the beer values
-  * @param "rate" number - the rating value we recieve from the OMBD api
+  * @param "beerMap" {object} - The object we use for holding the beer values
+  * @param "rate" {number} - the rating value we recieve from the OMBD api
+  * @return {object} - the object stored at
   */
-let extractStyle = (beerMap, rate) => {
+let extractStyle = function(beerMap, rate) {
   for(key in beerMap) {
     if(beerMap[key].rating_min <= rate <= beerMap[key].rating_max) {
       return beerMap[key];
@@ -136,7 +135,7 @@ var beerSearchParams = {
   key: breweryAPIKey,
   order: "random",
   styleId: queryStyleId,
-  hasLabels: "Y"
+  //hasLabels: "Y"
 };
 
 <<<<<<< HEAD
@@ -145,8 +144,16 @@ var beerSearchParams = {
 
 =======
 //send request to breweryDB for specific beer style.
-breweryUrl+=$.param(beerSearchParams);
-let brewJax = (breweryUrl) => {
+breweryUrl += $.param(beerSearchParams);
+
+/**
+  * Function for extracting the appropriate beer based on ratings
+  * @param "breweryUrl" {string} - Url for api call
+  * @param "cb" {function} - callback to call on response
+  * @return {void}
+  */
+
+let brewJax = function(breweryUrl, cb) {
   $.ajax({
     url:breweryUrl,
     method: "GET",
@@ -156,7 +163,16 @@ let brewJax = (breweryUrl) => {
   //  }
   })
   .done(function(res){
-    console.log(res);
+    var beerRes = {};
+    var styleRes = {};
+    var r = res.data[0];
+    beerRes.name = r.name;
+    beerRes.description = r.description;
+    beerRes.abv = r.abv || "No Abv Data";
+    beerRes.labels = r.labels;
+    styleRes = r.style;
+
+    cb(beerRes, styleRes);
   })
 }
 >>>>>>> fa87499974659731798e425556dcef7f4985febd
