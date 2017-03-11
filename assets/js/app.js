@@ -95,6 +95,13 @@ var movieJax = function(movieUrl, cb){
     	movieObj.rating = response.rating;
     	
       cb(movieObj);
+
+      // results returned above
+      // jquery creation below
+      // movie api
+      // $(<h1>).html(movieObj.title);
+      // $(<img>).attr( src, movieObj.poster);
+      // $(<p>).html(movieObj.plot); // displayed on modal
   });
 }
 
@@ -102,13 +109,15 @@ var movieJax = function(movieUrl, cb){
 // results returned above
 // jquery creation below
 // movie api
-// $(<h1>).html(movieJax.title);
-// $(<img>).attr( src, movieJax.poster);
-// $(<p>).html(movieJax.plot); // displayed on modal
-// // beer api
-// $(<h1>).html(beerType);
+// $(<h1>).html(movieObj.title);
+// $(<img>).attr( src, movieObj.poster);
+// $(<p>).html(movieObj.plot); // displayed on modal
+// beer api
+
+
+// $(<h1>).html(beerRes.style);
 // $(<beer divs go here>).beer(beer css and stuff with response beer type as the color);
-// $(<p>).html(beerDescription) //displayed on modal
+// $(<p>).html(beerRes.description) //displayed on modal
 
 // append all of the things to results div
 
@@ -175,6 +184,13 @@ let brewJax = function(breweryUrl, cb) {
     styleRes = r.style;
 
     cb(beerRes, styleRes);
+
+    // CONTROL LOGIC
+    // $(<h1>).html(beerRes.style);
+    // $(<beer divs go here>).beer(beer css and stuff with response beer type as the color);
+    // $(<p>).html(beerRes.description) //displayed on modal
+
+
   })
 }
 
