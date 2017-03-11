@@ -5,20 +5,48 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/tingle.min.css">
     <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
-    <script src="assets/javascript/tingle.min.js"></script>
+    <script src="assets/js/tingle.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/JSforBEER.js"></script>
+    <link href='assets/css/CSSforBeer.css' rel='stylesheet' type='text/css' />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
     <title>Beer and a Movie</title>
   </head>
   <!-- Neck -->
   <body>
     <div id="wrapper">
       <header>
-        <h1>Beer and a Movie</h1>
+        <link href='http://fonts.googleapis.com/css?family=Ultra:400' rel='stylesheet' type='text/css' />
+
+        <svg class="loading" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        	 width="574.558px" height="120px" viewBox="0 0 574.558 120" enable-background="new 0 0 574.558 120" xml:space="preserve">
+          <defs>
+            <pattern id="water" width=".25" height="1.1" patternContentUnits="objectBoundingBox">
+              <path fill="#ffb709" d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"/>
+            </pattern>
+
+            <text id="text" transform="matrix(1 0 0 1 -8.0684 116.7852)" font-family='Ultra' font-size="161.047">BEER</text>
+
+            <mask id="text-mask">
+              <use x="0" y="0" xlink:href="#text" opacity="1" fill="#ffffff"/>
+            </mask>
+          </defs>
+
+        	  <use x="0" y="0" xlink:href="#text" fill="#222"/>
+
+          <rect class="water-fill" mask="url(#text-mask)" fill="url(#water)" x="-400" y="0" width="1600" height="120"/>
+
+        </svg>
+        <h1>and a Movie</h1>
       </header>
-      <form id="movieForm">
-        <input type="text" id="movieTitle" />
-        <input type="Submit" id="movieSubmit" />
-      </form>
+        <div class="row">
+        <div class="col-md-10">
+          <form id="movieForm">
+            <input type="text" id="movieTitle" class="form-control"/>
+            <input type="Submit" id="movieSubmit" value="Beer Me!" class="btn"/>
+          </form>
+        </div>
+      </div>
     </div>
     <div id="results">
 

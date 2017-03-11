@@ -1,0 +1,12 @@
+body {
+  background-color: rgb(61, 67, 73);
+}
+
+#wrapper {
+  text-align: center;
+}
+
+#movieTitle {
+  width: 50%;
+  text-align: center;
+}
