@@ -81,8 +81,6 @@ const beerToRating = {
 // create function taht renders movie details
 
 
-
-
 $.ajax({url: movieUrl, method:"GET"})
 .done(function(response) {
 
@@ -93,7 +91,7 @@ $.ajax({url: movieUrl, method:"GET"})
 	movieObj.poster = response.poster;
 	movieObj.plot = response.plot;
 	movieObj.rating = response.rating;
-	console.log(response);
+	console.log(movieObj);
 });
 
 //create another function that will make ajax call
@@ -108,7 +106,7 @@ $.ajax({url: movieUrl, method:"GET"})
   * @param "beerMap" object - The object we use for holding the beer values
   * @param "rate" number - the rating value we recieve from the OMBD api
   */
-let extractStyle = (beerMap, rate) => {
+let extractStyle = function(beerMap, rate) {
   for(key in beerMap) {
     if(beerMap[key].rating_min <= rate <= beerMap[key].rating_max) {
       return beerMap[key];
@@ -119,14 +117,14 @@ var beerObj = extractStyle(beerToRating, 4.5);
 var queryStyleId = beerObj.beerStyleId;
 var beerSearchParams = {
   key: breweryAPIKey,
-  order: "random",
+  //order: "random",
   styleId: queryStyleId,
-  hasLabels: "Y"
+  //hasLabels: "Y"
 };
 
 //send request to breweryDB for specific beer style.
 breweryUrl+=$.param(beerSearchParams);
-let brewJax = (breweryUrl) => {
+let brewJax = function(breweryUrl) {
   $.ajax({
     url:breweryUrl,
     method: "GET",
