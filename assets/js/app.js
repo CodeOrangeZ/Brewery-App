@@ -177,8 +177,10 @@ let brewJax = function(rating, cb) {
   * changing elements, etc
   */
 
+
 $("#movieSubmit").on("click", function(event){
     event.preventDefault();
     var mov = $("#movieTitle").val().trim();
     movieJax(mov, console.log);
 });
+
