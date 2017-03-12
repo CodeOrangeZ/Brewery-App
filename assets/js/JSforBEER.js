@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
-  // instanciate new modal 'are you 21?'
-$('#wrapper').addClass('hide');
+  // instantiate new modal 'are you 21?'
+  $('#wrapper').addClass('hide');
 
   var modal = new tingle.modal({
       footer: true,
@@ -69,6 +69,5 @@ $('#wrapper').addClass('hide');
       yoyo:true,
       ease:Linear.easeNone
     });
-
   });
 });
