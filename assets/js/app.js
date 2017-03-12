@@ -108,6 +108,7 @@ var movieJax = function(movie, cb){
     	movieObj.posterURL = response.Poster;
     	movieObj.plot = response.Plot;
     	movieObj.rating = parseFloat(response.imdbRating);
+      brewJax(movieObj.rating, console.log);
       cb(movieObj);
   });
 }
@@ -121,7 +122,7 @@ var movieJax = function(movie, cb){
   */
 let extractStyle = function(beerMap, rate) {
   for(key in beerMap) {
-    if(beerMap[key].rating_min <= rate <= beerMap[key].rating_max) {
+    if(beerMap[key].rating_min <= rate && rate <= beerMap[key].rating_max) {
       return beerMap[key];
     }
   };
@@ -168,7 +169,6 @@ let brewJax = function(rating, cb) {
   * This will operate on the data for adding css classes.
   * changing elements, etc
   */
-
 
 $("#movieSubmit").on("click", function(event){
     event.preventDefault();
