@@ -1,8 +1,10 @@
 /**
   * Brewery DB & OMDB app
-  * this file so far a has mostly the back-end logic, middleware and front end
+  *
   */
 
+
+//object maps beer styles to rating ranges
 const beerToRating = {
   "American Style Premium Lager" : {
         beerStyleId: 97,
@@ -65,18 +67,31 @@ const beerToRating = {
 
 };
 
-//dummy variables, these will be addressed when the html pages start to take shape;
+
+// this is the CORS workaround function
+/**
+  * Function for extracting the appropriate beer based on ratings
+  * @param "requestUrl" {string} - Url for breweryDB api call
+  * @return {object} - response from ajax call.
+  */
+let proxyCall = (requestURL) => {
+  return $.ajax({
+    method: "POST",
+    dataType: "json",
+    url: "https://proxy-cbc.herokuapp.com/proxy",
+    data: {
+      url: requestURL
+    }
+  });
+};
 
 
-
-
-//send a request to OMDB and parse response
-
-
-// create function taht renders movie details
-
-
-// ajax is stored in a variable with movieurl and call back arguements
+/**
+  * function for extracting the appropriate beer based on ratings
+  * @param "movie" {string} - query parameter for api call
+  * @param "cb" {function} - callback to call on response
+  * @return {void}
+  */
 var movieJax = function(movie, cb){
   var movieUrl = "http://www.omdbapi.com/?";//API key not necessary
   var movieParam = {
@@ -84,7 +99,7 @@ var movieJax = function(movie, cb){
   };
   movieUrl += $.param(movieParam);
   $.ajax({url: movieUrl, method:"GET"})
-// response and call back are passed as arguments in done function
+    // response and call back are passed as arguments in done function
     .done(function(response) {
     //call movie detail function
     var movieObj = {};
@@ -93,19 +108,16 @@ var movieJax = function(movie, cb){
     	movieObj.posterURL = response.Poster;
     	movieObj.plot = response.Plot;
     	movieObj.rating = parseFloat(response.imdbRating);
-
       cb(movieObj);
   });
 }
 
 
-//response from OMDB will need to be operated on to map it to a specific beer style.
-//heavier beer for worse movies. Better movies, Lighter beer.
 /**
   * Function for extracting the appropriate beer based on ratings
   * @param "beerMap" {object} - The object we use for holding the beer values
   * @param "rate" {number} - the rating value we recieve from the OMBD api
-  * @return {object} - the object stored at
+  * @return {object} - the object stored at the style name key
   */
 let extractStyle = function(beerMap, rate) {
   for(key in beerMap) {
@@ -118,11 +130,10 @@ let extractStyle = function(beerMap, rate) {
 
 /**
   * Function for extracting the appropriate beer based on ratings
-  * @param "breweryUrl" {string} - Url for api call
+  * @param "rating" {number} - rating to base style extraction on, for api call
   * @param "cb" {function} - callback to call on response
   * @return {void}
   */
-
 let brewJax = function(rating, cb) {
   var breweryUrl = "http://api.brewerydb.com/v2/beers/?"; //this is the base, the API endpoint will need to be specified
   var breweryAPIKey = "a2bbeb0349946cb230fb7cc9a584a5a4";
@@ -132,41 +143,22 @@ let brewJax = function(rating, cb) {
     key: breweryAPIKey,
     order: "random",
     styleId: queryStyleId,
-    //hasLabels: "Y"
   };
   //send request to breweryDB for specific beer style.
   breweryUrl += $.param(beerSearchParams);
-  $.ajax({
-    url:breweryUrl,
-    method: "GET",
-  //   crossDomain : true,
-  //   xhrFields: {
-  //     withCredentials: true
-  //  }
-  })
-  .done(function(res){
+  proxyCall(breweryUrl).done(function(res){
     var beerRes = {};
     var styleRes = {};
-    var r = res.data[0];
+    var r = res.data.data[0];
     beerRes.name = r.name;
     beerRes.description = r.description;
     beerRes.abv = r.abv || "No Abv Data";
     beerRes.labels = r.labels;
     styleRes = r.style;
-
     cb(beerRes, styleRes);
-
-
   })
 }
 
-
-//send data to controller/middleware logic.
-
-
-
-
-//need to find a way to incorporate the firebase database.
 
 
 
@@ -183,4 +175,3 @@ $("#movieSubmit").on("click", function(event){
     var mov = $("#movieTitle").val().trim();
     movieJax(mov, console.log);
 });
-
