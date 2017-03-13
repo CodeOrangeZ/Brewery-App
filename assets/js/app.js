@@ -212,7 +212,7 @@ let brewJax = function(breweryUrl, cb) {
   * changing elements, etc
   */
 
-<<<<<<< HEAD
+
 $("#movieSubmit").on("click", function(event){
     event.preventDefault();
     movieUrl += $("#movieTitle").val().trim();
@@ -288,6 +288,4 @@ $("#beerImgId").on("click", "img", function(object) {
   $(#results).append(beerInfoDiv);
 
 };
-=======
-  
->>>>>>> c1dad91229b21479e6afa80fcc8c59c75abbe193
+
