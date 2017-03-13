@@ -1,8 +1,10 @@
-
 $(document).ready(function() {
-  // instantiate new modal 'are you 21?'
-  $('#wrapper').addClass('hide');
 
+
+  $(".contentDiv").addClass("hide");
+
+
+  // instanciate new modal 'are you 21?'
   var modal = new tingle.modal({
       footer: true,
       stickyFooter: false,
@@ -18,7 +20,7 @@ $(document).ready(function() {
           // here's goes some logic
           // e.g. save content before closing the modal
           return true; // close the modal
-      	return false; // nothing happens
+        return false; // nothing happens
       }
   });
 
@@ -29,45 +31,66 @@ $(document).ready(function() {
   modal.addFooterBtn('Yes', 'yesBtn tingle-btn tingle-btn--primary', function() {
       // here goes some logic
       modal.close();
+      $(".contentDiv").removeClass("hide");
+
+      var audio = document.getElementsByTagName("audio")[0];
+      audio.play();
+
+
+
+        var fill=document.querySelector(".water-fill");
+        TweenMax.fromTo(fill,0.8,{
+          attr:{
+            x:-400
+          }
+        },
+        {
+          attr:{
+            x:0,
+          },
+
+          repeat:-1,
+          ease:Linear.easeNone
+        });
+
+        TweenMax.fromTo(fill,10,{
+          attr:{
+            y:120,
+            height:0
+          },
+        },{
+          attr:{
+            y:7,
+            height:140
+          },
+          repeat: 0,
+          yoyo:true,
+          ease:Linear.easeNone
+        });
+
+
+
   });
 
   // add another button
   modal.addFooterBtn('No', 'tingle-btn tingle-btn--danger', function() {
       // here goes some logic
       modal.close();
+      $(".not21").removeClass('hide');
+      
   });
 
   // open modal
   modal.open();
-  $('#wrapper').removeClass('hide');
-  $('.yesBtn').on('click',function(){
-    var fill=document.querySelector(".water-fill");
-    TweenMax.fromTo(fill,0.8,{
-      attr:{
-        x:-400
-      }
-    },
-    {
-      attr:{
-        x:0,
-      },
-      repeat:-1,
-      ease:Linear.easeNone
-    });
 
-    TweenMax.fromTo(fill,10,{
-      attr:{
-        y:120,
-        height:0
-      },
-    },{
-      attr:{
-        y:-20,
-        height:140
-      },
-      repeat:00,
-      yoyo:true,
-      ease:Linear.easeNone
-    });
-  });
 });
+
+
+
+
+
+
+//function to fade in the second half of title
+
+
+
