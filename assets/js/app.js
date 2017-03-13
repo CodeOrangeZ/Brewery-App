@@ -212,4 +212,80 @@ let brewJax = function(breweryUrl, cb) {
   * changing elements, etc
   */
 
-  
+
+$("#movieSubmit").on("click", function(event){
+    event.preventDefault();
+    movieUrl += $("#movieTitle").val().trim();
+    $.ajax({url: movieUrl, method:"GET"})
+     .done(function(response) {
+     console.log(response);
+   })
+});
+
+
+//Creating a div for the movie image
+function createMovieDiv (object){
+// Div is created to contain movie image and title
+  var movieDiv = $("<div>");
+  var movieDisplay = object.title;
+  //New paragraph is created and displays the name of
+  var movieP = $("<p>").text(object.title);
+  var movieImg = $("<img>");
+  movieImg.attr("src", "alt", object.posterURL);
+  movieImg.attr("id", "movieImgId");
+  movieDiv.append(movieImg);
+  movieDiv.append(p);
+
+  $(#results).append(movieDiv);
+
+
+};
+
+//Creating a div for the beer image
+function createBeerDiv (object){
+// Div is created to contain beer image and title
+  var beerDiv = $("<div>");
+  var beerDisplay = object.title;
+  var beerP = $("<p>").text(object.title);
+  var beerImg = $("<img>");
+
+  beerImg.attr("src", "alt", object.posterURL);
+  beerImg.attr("id", "beerImgId");
+  beerDiv.append(beerImg);
+  beerDiv.append(p);
+
+  $(#results).append(beerDiv);
+
+
+};
+//Movie IMG onclick function
+$("#movieImgId").on("click", "img", function(object) {
+  $("#results").empty();
+  var movieInfoDiv = $("<div>");
+  var movieName = $(<h1>).text(object.title);
+  var movieDescription = $("<p>").text(object.plot);
+
+  movieInfoDiv.append(movieName);
+  movieInfoDiv.append(movieDescription);
+
+  $(#results).append(movieInfoDiv);
+
+};
+
+//Beer IMG onclick function
+$("#beerImgId").on("click", "img", function(object) {
+  $("#results").empty();
+  var beerInfoDiv = $("<div>");
+  var beerName = $(<h1>).text(object.style);
+  var beerDescription = $("<p>").text(object.description);
+  var beerRecommendation = $("<p>").text("We recommend" + beerName);
+
+
+  beerInfoDiv.append(beerName);
+  beerInfoDiv.append(beerDescription);
+  beerInfoDiv.append(beerRecommendation);
+
+  $(#results).append(beerInfoDiv);
+
+};
+
