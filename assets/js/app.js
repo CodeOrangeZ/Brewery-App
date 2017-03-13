@@ -80,7 +80,7 @@ const beerToRating = {
 // create function taht renders movie details
 
 
-// ajax is stored in a variable with movieurl and call back arguements
+// ajax is stored in a variable with movieurl and call back arguements 
 var movieJax = function(movieUrl, cb){
   $.ajax({url: movieUrl, method:"GET"})
 // response and call back are passed as arguments in done function
@@ -93,7 +93,7 @@ var movieJax = function(movieUrl, cb){
     	movieObj.poster = response.poster;
     	movieObj.plot = response.plot;
     	movieObj.rating = response.rating;
-
+    	
       cb(movieObj);
 
       // results returned above
@@ -212,6 +212,7 @@ let brewJax = function(breweryUrl, cb) {
   * changing elements, etc
   */
 
+
 $("#movieSubmit").on("click", function(event){
     event.preventDefault();
     movieUrl += $("#movieTitle").val().trim();
@@ -287,3 +288,4 @@ $("#beerImgId").on("click", "img", function(object) {
   $(#results).append(beerInfoDiv);
 
 };
+
