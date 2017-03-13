@@ -72,7 +72,7 @@ const beerToRating = {
 /**
   * Function for extracting the appropriate beer based on ratings
   * @param "requestUrl" {string} - Url for breweryDB api call
-  * @return {object} - response from ajax call.
+  * @return {object} - response from ajax call, need to handle .done() outside
   */
 let proxyCall = (requestURL) => {
   return $.ajax({
