@@ -108,7 +108,7 @@ var movieJax = function(movie, cb){
     	movieObj.posterURL = response.Poster;
     	movieObj.plot = response.Plot;
     	movieObj.rating = parseFloat(response.imdbRating);
-      brewJax(movieObj.rating, console.log);
+      brewJax(movieObj.rating, createBeerDiv);
       cb(movieObj);
   });
 }
@@ -184,31 +184,32 @@ function createMovieDiv (object){
   var movieDisplay = object.title;
   //New paragraph is created and displays the name of
   var movieP = $("<p>").text(movieDisplay);
+  var moviePlotP = $("<p>").text(object.plot);
   var movieImg = $("<img>");
   movieImg.attr("src", object.posterURL);
   movieImg.attr("id", "movieImgId");
-  movieDiv.append(movieImg);
-  movieDiv.append(movieP);
-
-  $("#results").append(movieDiv);
+  movieDiv.append(movieImg)
+    .append(movieP)
+    .append(moviePlotP)
+    .appendTo($("#results"));
 
 
 };
 
 //Creating a div for the beer image
-function createBeerDiv (object){
+function createBeerDiv(styleObj, beerObj){
 // Div is created to contain beer image and title
   var beerDiv = $("<div>");
-  var beerDisplay = object.title;
+  var beerDisplay = styleObj.name;
   var beerP = $("<p>").text(beerDisplay);
-  var beerImg = $("<img>");
+  var beerDesc = $("<p>").text(styleObj.description);
 
-  beerImg.attr("src", object.posterURL);
-  beerImg.attr("id", "beerImgId");
-  beerDiv.append(beerImg);
-  beerDiv.append(beerP);
+  //var beerImg = $("<img>");
 
-  $("#results").append(beerDiv);
+  //beerImg.attr("src", object.posterURL);
+  //beerImg.attr("id", "beerImgId");
+  beerDiv.append(beerP)
+    .appendTo($("#results"));
 
 
 };
