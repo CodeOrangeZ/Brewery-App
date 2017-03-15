@@ -87,23 +87,23 @@ svg {
 /*  margin-left: 40px;
 */}
 
-.searchBar { 
-  display: block; 
-  width:100%; 
+.searchBar {
+  display: block;
+  width:100%;
   margin-bottom: 30px;}
 
-.searchBtn { 
-  font-size: 29px; 
-  font-family: 'ultra'; 
+.searchBtn {
+  font-size: 29px;
+  font-family: 'ultra';
   padding: 25px 40px 25px 40px;
   color: #000;
   background-color: #ffb709;
 }
 
-.searchBtn:hover { 
+.searchBtn:hover {
   color: #fff;
   background-color: #ffb709;
-  cursor:url("../assets/images/beer.gif"), url(foo.cur), auto;
+  /*cursor:url("../assets/images/beer.gif"), url(foo.cur), auto;*/
 
 }
 
