@@ -109,12 +109,7 @@ var movieJax = function(movie, cb){
     	movieObj.posterURL = response.Poster;
     	movieObj.plot = response.Plot;
     	movieObj.rating = parseFloat(response.imdbRating);
-<<<<<<< HEAD
-      console.log(movieObj);
-      brewJax(movieObj.rating, console.log);
-=======
       brewJax(movieObj.rating, createBeerDiv);
->>>>>>> 45f31a37d70893e1e89419623b3bab5422949cc9
       cb(movieObj);
   });
 }
