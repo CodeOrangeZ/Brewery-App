@@ -180,17 +180,18 @@ $("#movieSubmit").on("click", function(event){
 //Creating a div for the movie image
 function createMovieDiv (object){
 // Div is created to contain movie image and title
-  var movieDiv = $("<div>");
-  var movieDisplay = object.title;
+  var movieDiv = $("<div>").addClass("col col-md-6");
   //New paragraph is created and displays the name of
-  var movieP = $("<p>").text(movieDisplay);
-  var moviePlotP = $("<p>").text(object.plot);
-  var movieImg = $("<img>");
+  var movieP = $("<p>").addClass("col col-md-12")
+    .text(object.title);
+  //var moviePlotP = $("<p>")addClass("col col-md-12")
+    //.text(object.plot);
+  var movieImg = $("<img>").addClass("col col-md-12");
   movieImg.attr("src", object.posterURL);
   movieImg.attr("id", "movieImgId");
   movieDiv.append(movieImg)
     .append(movieP)
-    .append(moviePlotP)
+    //.append(moviePlotP)
     .appendTo($("#results"));
 
 
@@ -199,19 +200,20 @@ function createMovieDiv (object){
 //Creating a div for the beer image
 function createBeerDiv(styleObj, beerObj){
 // Div is created to contain beer image and title
-  var beerDiv = $("<div>");
-  var beerDisplay = styleObj.name;
-  var beerP = $("<p>").text(beerDisplay);
-  var beerDesc = $("<p>").text(styleObj.description);
+
+  var beerDiv = $("<div>").addClass("col col-md-6");
+  var beerP = $("<p>").addClass("col col-md-12")
+    .text(styleObj.name);
+  var beerDesc = $("<p>").addClass("col col-md-12")
+  .text(styleObj.description);
 
   //var beerImg = $("<img>");
 
   //beerImg.attr("src", object.posterURL);
-  //beerImg.attr("id", "beerImgId");
+  beerDiv.attr("id", "beerImgId");
   beerDiv.append(beerP)
+    .append(beerDesc)
     .appendTo($("#results"));
-
-
 };
 //Movie IMG onclick function
 $("#movieImgId").on("click", "img", function(object) {
@@ -219,10 +221,8 @@ $("#movieImgId").on("click", "img", function(object) {
   var movieInfoDiv = $("<div>");
   var movieName = $("<h1>").text(object.title);
   var movieDescription = $("<p>").text(object.plot);
-
   movieInfoDiv.append(movieName);
   movieInfoDiv.append(movieDescription);
-
   $("#results").append(movieInfoDiv);
 
 });
