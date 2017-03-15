@@ -48,10 +48,6 @@ body {
 
 }
 
-
-
-
-
 /*END OF MODAL CSS*/
 
 
@@ -75,17 +71,14 @@ body {
 }
 
 svg {
-/*  margin: 45px;
-*/  width: 100%;
+width: 100%;
 }
- #movieImg {
+
+#movieImg {
    width: 100%;
    text-align: center;
  }
 
-.svgDiv {
-/*  margin-left: 40px;
-*/}
 
 .searchBar {
   display: block;
@@ -135,3 +128,442 @@ svg {
    width: 65%;
  }
 }
+
+
+
+
+
+/*beer pour css*/
+
+#container {
+  height: 370px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  top: -20px;
+  left: 6%;
+/*  width: 348px;*/
+}
+
+#container div { position: absolute; }
+
+.container2 {
+  display: block;
+  float: right;
+
+
+}
+
+
+.pour {
+  position: absolute;
+  left: 39%;
+  width: 20px;
+  height: 0px;
+  background-color: #ff9d06;
+  border-radius: 10px
+}
+
+#beaker {
+  border: 10px solid rgba(255, 255, 255, 0.4);
+  border-top: 0;
+  border-radius: 10px 10px 10px 10px;  
+  height: 270px;
+  left: 14px;
+  bottom: 0;
+  width: 160px;
+
+}
+
+.handle {
+    position: absolute;
+    right: -10px;
+    top: 60px;
+}
+.handle .top-right {
+    height: 80px;
+    width: 40px;
+  
+    border-top: solid 20px rgba(255, 255, 255, 0.4);
+    border-right: solid 20px rgba(255, 255, 255, 0.4);
+    border-top-right-radius: 50px;
+}
+.handle .bottom-right {
+    height: 70px;
+      top: 80px;
+    width: 40px;
+    border-bottom: solid 20px rgba(255, 255, 255, 0.4);
+    border-right: solid 20px rgba(255, 255, 255, 0.4);
+    border-bottom-right-radius: 50px;
+}
+
+
+/* #beaker:before,
+#beaker:after {
+  border: 1px solid #FFF;
+  border-bottom: 0;
+  border-radius: 30px 30px 0 0;
+  content: '';
+  height: 30px;
+  position: absolute;
+  top: -40px;
+  width: 30px;
+} */
+
+#beaker:before { left: -50px; }
+#beaker:after { right: -50px; }
+
+#liquid {
+  background-color: #ff9d06;
+  border: 10px solid #ff9d06;
+  border-radius: 0 0 2px 2px;
+  bottom: 0;
+  height: 0px;
+  overflow: hidden;
+  width: 141px;
+}
+
+#liquid:after {
+  background-color: rgba(255, 255, 255, 0.25);
+  bottom: -10px;
+  content: '';
+  height: 300px;
+  left: -40px;
+  position: absolute;
+  transform: rotate(30deg);
+  -webkit-transform: rotate(15deg);
+  width: 110px;
+}
+
+#liquid .bubble {
+  -webkit-animation-name: bubble;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  background-color: rgba(255, 255, 255, 0.2);
+  bottom: 0;
+  border-radius: 10px;
+  height: 20px;
+  width: 20px;
+}
+
+@-webkit-keyframes bubble {
+  0% { bottom: 0; }
+
+   50% {
+     background-color: rgba(255, 255, 255, 0.2);
+      bottom: 80px;
+   }
+
+   100% {
+     background-color: rgba(255, 255, 255, 0);
+      bottom: 160px;
+   }
+}
+
+.bubble1 {
+  left: 10px;
+  -webkit-animation-delay: 1000ms;
+  -webkit-animation-duration: 1000ms;
+}
+
+.bubble2 {
+  left: 50px;
+  -webkit-animation-delay: 700ms;
+  -webkit-animation-duration: 1100ms;
+}
+
+.bubble3 {
+  left: 100px;
+  -webkit-animation-delay: 1200ms;
+  -webkit-animation-duration: 1300ms;
+}
+
+.bubble4 {
+  left: 130px;
+  -webkit-animation-delay: 1100ms;
+  -webkit-animation-duration: 700ms;
+}
+
+.bubble5 {
+  left: 170px;
+  -webkit-animation-delay: 1300ms;
+  -webkit-animation-duration: 800ms;
+}
+
+/* Foam */
+
+.beer-foam {
+  position: absolute;
+  bottom: 10px;
+}
+
+.foam-1, .foam-2, .foam-3, .foam-4, 
+.foam-5, .foam-6, .foam-7 {
+  float: left;
+  position: absolute;
+  z-index: 999;
+  width: 40px;
+  height: 43px;
+  border-radius: 30px;
+  background-color: #fefefe;
+}
+.foam-1 {
+  top: -28px;
+  left: -5px;
+}
+.foam-2 {
+  top: -32px;
+  left: 20px; 
+}
+.foam-3 {
+  top: -28px;
+  left: 50px; 
+}
+.foam-4 {
+  top: -31px;
+  left: 80px; 
+}
+.foam-5 {
+  top: -30px;
+  left: 105px; 
+}
+/* .foam-6 {
+  top: -20px;
+  left: 140px; 
+}
+.foam-7 {
+  top: -30px;
+  left: 160px;
+} */
+
+/* Drunk Text */
+
+.animated {
+  -webkit-animation-fill-mode:both;
+     -moz-animation-fill-mode:both;
+          animation-fill-mode:both;
+  
+  -webkit-animation-duration:5s;
+     -moz-animation-duration:5s;
+          animation-duration:5s;
+  
+  -webkit-animation-delay:3.5s; 
+     -moz-animation-delay:3.5s;
+          animation-delay:3.5s;
+}
+
+
+.animated.drunk {
+  -webkit-animation-duration:2s;
+     -moz-animation-duration:2s;
+          animation-duration:2s;
+}
+
+@-webkit-keyframes drunk {
+  0% { 
+    -webkit-transform: rotate(0); 
+    -webkit-transform-origin: top left; 
+    -webkit-animation-timing-function: ease-in-out; 
+  }
+  
+  20%, 60% { 
+    -webkit-transform: rotate(80deg); 
+    -webkit-transform-origin: top left; 
+    -webkit-animation-timing-function: ease-in-out; 
+  } 
+  40% { 
+    -webkit-transform: rotate(60deg); 
+    -webkit-transform-origin: top left; 
+    -webkit-animation-timing-function: ease-in-out; 
+  } 
+  
+  80% { 
+    -webkit-transform: rotate(60deg) translateY(0);  
+    -webkit-transform-origin: top left; 
+    -webkit-animation-timing-function: ease-in-out;
+    opacity: 1;
+  } 
+  
+  100% {
+    -webkit-transform: translateY(700px); 
+    opacity: 0; 
+  }
+}
+
+@-moz-keyframes drunk {
+  0% { 
+    -moz-transform: rotate(0); 
+    -moz-transform-origin: top left; 
+    -moz-animation-timing-function: ease-in-out; 
+  }
+  
+  20%, 60% { 
+    -moz-transform: rotate(80deg); 
+    -moz-transform-origin: top left; 
+    -moz-animation-timing-function: ease-in-out; 
+  } 
+  
+  40% { 
+    -moz-transform: rotate(60deg); 
+    -moz-transform-origin: top left; 
+    -moz-animation-timing-function: ease-in-out; 
+  }
+  
+  80% {
+    -moz-transform: rotate(60deg) translateY(0); opacity: 1; 
+    -moz-transform-origin: top left; 
+    -moz-animation-timing-function: ease-in-out; 
+  }
+  
+  100% { 
+    -moz-transform: translateY(700px); 
+    opacity: 0; 
+  }
+}
+
+@keyframes drunk {
+  0% { 
+    transform: rotate(0); 
+    transform-origin: top left; 
+    animation-timing-function: ease-in-out; 
+  }
+  
+  20%, 60% { 
+    transform: rotate(80deg); 
+    transform-origin: top left; 
+    animation-timing-function: ease-in-out; 
+  }
+  
+  40% { 
+    transform: rotate(60deg); 
+    transform-origin: top left; 
+    animation-timing-function: ease-in-out; 
+  }
+  
+  80% { 
+    transform: rotate(60deg) translateY(0); 
+    opacity: 1; transform-origin: top left; 
+    animation-timing-function: ease-in-out; 
+  } 
+  100% { 
+    transform: translateY(700px); 
+    opacity: 0; 
+  }
+}
+
+.drunk {
+  -webkit-animation-name: drunk;
+  -moz-animation-name: drunk;
+  animation-name: drunk;
+}
+
+
+/*Differe beer colors*/
+
+/*STOUT*/
+#liquid.stout, .pour.stout {
+  background-color: #211712;
+  border: #211712 ;
+}
+
+.foam.stout {
+    background-color: #dec68d;
+}
+
+/*DIPA*/
+#liquid.dipa, .pour.dipa {
+  background-color: #b76903;
+  border: #b76903 ;
+}
+
+.foam.dipa {
+    background-color: #fffccd;
+}
+
+
+/*MALT*/
+#liquid.malt, .pour.malt {
+  background-color: #ffa700;
+  border: #ffa700 ;
+}
+
+.foam.malt {
+    background-color: #fff;
+}
+
+/*IPA*/
+#liquid.ipa, .pour.ipa {
+  background-color: #b76903;
+  border: #b76903 ;
+}
+
+.foam.ipa {
+    background-color: #fffccd;
+}
+
+/*PALE*/
+#liquid.pale, .pour.pale {
+  background-color: #bf7a21;
+  border: #bf7a21 ;
+}
+
+.foam.pale {
+    background-color: #fffccd;
+}
+
+/*RED ALE*/
+#liquid.redale, .pour.redale {
+  background-color: #a24907;
+  border: #a24907 ;
+}
+
+.foam.redale {
+    background-color: #fffccd;
+}
+
+/*LAGER*/
+#liquid.lager, .pour.lager {
+  background-color: #211712;
+  border: #211712 ;
+}
+
+.foam.lager {
+    background-color: #fff;
+}
+
+/*BELGIAN WHITE*/
+#liquid.white, .pour.white {
+  background-color: #ce802c;
+  border: #ce802c ;
+}
+
+.foam.white {
+    background-color: #fffccd;
+}
+
+/*HEFEWEIZEN*/
+#liquid.hef, .pour.hef {
+  background-color: #d28814;
+  border: #d28814 ;
+}
+
+.foam.hef {
+    background-color: #fffccd;
+}
+
+
+
+/*PREMIUM LAGER*/
+#liquid.premium, .pour.premium {
+  background-color: #ffcc00;
+  border: #ffcc00 ;
+}
+
+.foam.premium {
+    background-color: #fff;
+}
+
+
+
+
+

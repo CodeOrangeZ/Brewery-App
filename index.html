@@ -23,7 +23,7 @@
 
 <!-- IF 21, THIS WILL SHOW -->
     
-  <div id="wrapper">
+<div id="wrapper">
 
     <div class="leftSpacing col-md-2"></div>
 
@@ -81,29 +81,78 @@
 
       <!-- Beginning of search BUTTON -->
 
-      <div class="searchBtnDiv">
-            <button type="Submit" id="movieSubmit" class="searchBtn btn btn-lg">BEER ME</button>
-      </div>
+          <div class="searchBtnDiv">
+                <button type="Submit" id="movieSubmit" class="searchBtn btn btn-lg">BEER ME</button>
+          </div>
 
       <!-- End of search BUTTON -->
-<audio>
-  <source class="beer" src="assets/audio/beer-pour.mp3"></source>
-</audio>
+                <audio>
+                  <source class="beer" src="assets/audio/beer-pour.mp3"></source>
+                </audio>
 
     </div>
     <!-- END of CONTENT DIV -->
-  
 </div>
     <!-- END of WRAPPER DIV -->
 
     
 
 
-    <div class="rightSpacing col-md-2"></div>
+    
     
 
 
-    <div id="results"></div>
+<div id="results" class="container">
+
+    <div class="row">
+        <div class="col col-md-6 movieResults">
+            <div class="col col-md-12 moviePoster"></div>
+                <div class="col col-md-12 movieTitle"></div>
+        </div>
+
+        <div class="col col-md-6 beerResults">
+            <div id='beerAnimationId' class="col col-md-12 beerAnimation">
+              <div class="col col-xs-5" id="container">
+              <script type="text/javascript" src="assets/js/beer-pour.js"></script>
+                        <div class="pour"></div>
+                        <div id="beaker" class="beaker">
+                          <div class="beer-foam">
+                            <div class="foam foam-1"></div>
+                            <div class="foam foam-2"></div>
+                            <div class="foam foam-3"></div>
+                            <div class="foam foam-4"></div>
+                            <div class="foam foam-5"></div>
+                          </div>
+                                   <div class="handle">
+                                      <div class="top-right"></div>
+                                      <div class="bottom-right"></div>
+                                  </div>
+                          <div id="liquid">
+                            
+                            <div class="bubble bubble1"></div>
+                            <div class="bubble bubble2"></div>
+                            <div class="bubble bubble3"></div>
+
+                          </div>
+                        </div>
+
+
+
+            </div>
+                <div class="col col-md-12 beerTitle"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-12 searchAgain"></div>
+    </div>
+
+</div>
+
+
+
+
+
 
 
   </body>
