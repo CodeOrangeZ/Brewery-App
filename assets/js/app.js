@@ -96,6 +96,7 @@ var movieJax = function(movie, cb){
   var movieUrl = "http://www.omdbapi.com/?";//API key not necessary
   var movieParam = {
     t: movie,
+    plot: "full"
   };
   movieUrl += $.param(movieParam);
   $.ajax({url: movieUrl, method:"GET"})
@@ -188,7 +189,9 @@ function createMovieDiv (object){
     //.text(object.plot);
   var movieImg = $("<img>").addClass("col col-md-12");
   movieImg.attr("src", object.posterURL);
-  movieImg.attr("id", "movieImgId");
+
+  movieImg.attr("id", "movieImgId")
+    .data("plot", object.plot);
   movieDiv.append(movieImg)
     .append(movieP)
     //.append(moviePlotP)
@@ -216,17 +219,38 @@ function createBeerDiv(styleObj, beerObj){
     .appendTo($("#results"));
 };
 //Movie IMG onclick function
-$("#movieImgId").on("click", "img", function(object) {
-  $("#results").empty();
-  var movieInfoDiv = $("<div>");
-  var movieName = $("<h1>").text(object.title);
-  var movieDescription = $("<p>").text(object.plot);
-  movieInfoDiv.append(movieName);
-  movieInfoDiv.append(movieDescription);
-  $("#results").append(movieInfoDiv);
+$("#results").on("click", "img", function(object) {
+   var modal = new tingle.modal({
+     footer: true,
+     stickyFooter: false,
+     closeLabel: "Close",
+     cssClass: ['custom-class-1', 'custom-class-2'],
+     onOpen: function() {
+         console.log('modal open');
+     },
+     onClose: function() {
+         console.log('modal closed');
+     },
+     beforeClose: function() {
+         // here's goes some logic
+         // e.g. save content before closing the modal
+         return true; // close the modal
+     	return false; // nothing happens
+     }
+ });
 
+ // set content
+ modal.setContent($(this).data('plot'));
+
+ // add another button
+ modal.addFooterBtn('X', 'tingle-btn tingle-btn--danger', function() {
+     // here goes some logic
+     modal.close();
+ });
+
+ // open modal
+ modal.open();
 });
-
 //Beer IMG onclick function
 $("#beerImgId").on("click", "img", function(object) {
   $("#results").empty();
