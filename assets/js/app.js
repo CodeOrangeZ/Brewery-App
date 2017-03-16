@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 /**
   * Brewery DB & OMDB app
   *
@@ -180,11 +174,7 @@ let brewJax = function(rating, cb) {
 
 $("#movieSubmit").on("click", function(event){
     event.preventDefault();
-    $("#wrapper").addClass("hide");
-        $(".beaker").removeClass("hide");
-        // $("#liquid").addClass("stout");
-        // $(".pour").addClass("stout");
-        // $(".foam").addClass("stout");
+
     var mov = $("#movieTitle").val().trim();
     movieJax(mov, createMovieDiv);
 });
@@ -192,7 +182,7 @@ $("#movieSubmit").on("click", function(event){
 
 //Creating a div for the movie image
 function createMovieDiv (object){
-// Div is created to contain movie image and title
+  // Div is created to contain movie image and title
   var movieDiv = $("<div>").addClass("col col-md-6");
   //New paragraph is created and displays the name of
   var movieP = $("<p>").addClass("col col-md-12")
@@ -214,23 +204,31 @@ function createMovieDiv (object){
 
 //Creating a div for the beer image
 function createBeerDiv(styleObj, beerObj){
-// Div is created to contain beer image and title
+  // Div is created to contain beer image and title
 
-  var beerDiv = $("<div>").addClass("col col-md-6");
+  $("#beerAnimationId").removeClass("hide");
+
+  var beerDiv = $("<div>").addClass("col col-md-6")
+    .append($("#beerAnimationId"))
+    .attr("id", "beerImgId");
+
+
   var beerP = $("<p>").addClass("col col-md-12")
     .text(styleObj.name);
+
   var beerDesc = $("<p>").addClass("col col-md-12")
-  .text(styleObj.description);
+    .text(styleObj.description);
 
-  //var beerImg = $("<img>");
+  $("#wrapper").addClass("hide");
 
-  //beerImg.attr("src", object.posterURL);
-  beerDiv.attr("id", "beerImgId");
+
   beerDiv.append(beerP)
     .append(beerDesc)
     .appendTo($("#results"));
 };
 //Movie IMG onclick function
+
+
 $("#results").on("click", "img", function(object) {
    var modal = new tingle.modal({
      footer: true,
@@ -263,9 +261,11 @@ $("#results").on("click", "img", function(object) {
  // open modal
  modal.open();
 });
+
+
+
 //Beer IMG onclick function
 $("#beerImgId").on("click", "img", function(object) {
-  $("#results").empty();
   var beerInfoDiv = $("<div>");
   var beerName = $("<h1>").text(object.style);
   var beerDescription = $("<p>").text(object.description);

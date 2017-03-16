@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 
   $(".contentDiv").addClass("hide");
-  $(".beaker").addClass("hide");
+  $("#beerAnimationId").addClass("hide");
 
 
   // instanciate new modal 'are you 21?'
