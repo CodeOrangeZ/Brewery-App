@@ -215,9 +215,14 @@ function createBeerDiv(beerObj, styleObj){
   $('.searchA').removeClass('hide');
 
   var beerDiv = $("<div>").addClass("col col-md-6")
+    .clone()
     .append($("#beerAnimationId"))
     .data("description", styleObj.description)
+    .data("name", styleObj.name)
     .attr("id", "beerImgId");
+
+
+
 
   var beerP = $("<h1>").addClass("col col-md-12 beerTitle")
     .text(styleObj.name);
@@ -272,11 +277,14 @@ $("#beerAnimationId").on("click", function(object) {
     cssClass: ['custom-class-1', 'custom-class-2'],
     onOpen: function() {
         console.log('modal open');
+        console.log(modal);
     },
     onClose: function() {
         console.log('modal closed');
+
     },
     beforeClose: function() {
+
         // here's goes some logic
         // e.g. save content before closing the modal
         return true; // close the modal
@@ -285,7 +293,7 @@ $("#beerAnimationId").on("click", function(object) {
   });
 
   // set content
-  modal.setContent($('#beerImgId').data('description'));
+  modal.setContent($('#beerImgId').data('description')+$('#beerImgId').data('name'));
 
   // open modal
   modal.open();
