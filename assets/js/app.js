@@ -21,8 +21,8 @@ const beerToRating = {
 
   "Belgian Style White" : {
         beerStyleId: 65,
-        rating_min: 8.0,
-        rating_max: 7.6
+        rating_min: 7.6,
+        rating_max: 8.0
       },
 
   "American Style Lager" : {
@@ -104,14 +104,15 @@ var movieJax = function(movie, cb){
     // response and call back are passed as arguments in done function
     .done(function(response) {
     //call movie detail function
+    console.log(response);
     var movieObj = {};
     //stored desired paramters in vars
-    	movieObj.title = response.Title;
-    	movieObj.posterURL = response.Poster;
-    	movieObj.plot = response.Plot;
-    	movieObj.rating = parseFloat(response.imdbRating);
-      brewJax(movieObj.rating, createBeerDiv);
-      cb(movieObj);
+  	movieObj.title = response.Title;
+  	movieObj.posterURL = response.Poster;
+  	movieObj.plot = response.Plot;
+  	movieObj.rating = parseFloat(response.imdbRating);
+    brewJax(movieObj.rating, createBeerDiv);
+    cb(movieObj);
   });
 }
 
@@ -141,6 +142,7 @@ let brewJax = function(rating, cb) {
   var breweryUrl = "http://api.brewerydb.com/v2/beers/?"; //this is the base, the API endpoint will need to be specified
   var breweryAPIKey = "a2bbeb0349946cb230fb7cc9a584a5a4";
   var beerObj = extractStyle(beerToRating, rating);
+  console.log(beerObj);
   var queryStyleId = beerObj.beerStyleId;
   var beerSearchParams = {
     key: breweryAPIKey,
