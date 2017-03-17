@@ -183,7 +183,7 @@ $("#movieSubmit").on("click", function(event){
 //Creating a div for the movie image
 function createMovieDiv (object){
   // Div is created to contain movie image and title
-  var movieDiv = $("<div>").addClass("col col-md-6");
+  var movieDiv = $(".movieResults");
   //New paragraph is created and displays the name of
   var movieP = $("<p>").addClass("col col-md-12")
     .text(object.title);
