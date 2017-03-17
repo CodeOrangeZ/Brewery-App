@@ -188,7 +188,7 @@ function createMovieDiv (object){
   // Div is created to contain movie image and title
   var movieDiv = $(".movieResults");
   //New paragraph is created and displays the name of
-  var movieP = $("<p>").addClass("col col-md-12")
+  var movieP = $("<h1>").addClass("col col-md-12")
     .text(object.title);
   //var moviePlotP = $("<p>")addClass("col col-md-12")
     //.text(object.plot);

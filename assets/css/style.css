@@ -561,3 +561,8 @@ width: 100%;
 .foam.premium {
     background-color: #fff;
 }
+
+#buttonWrapper {
+  margin: 0 auto;
+  text-align: center;
+}
