@@ -562,7 +562,128 @@ width: 100%;
     background-color: #fff;
 }
 
+<<<<<<< HEAD
+
+
+.beerResults {
+  display: inline-block;
+  float:right;
+}
+
+
+
+/*RESULTS MOVIE DIV*/
+.moviePoster {
+  left: 45%;
+}
+
+#movieImgId {
+  left: 45%; 
+  width: 45%;
+  margin-top:30px;
+
+}
+
+.movieTitle {
+  color: white;
+}
+
+.beerTitle {
+margin-left: 15px;
+
+}
+
+/*MEDIA QUERY for RESULTS*/
+@media (max-width: 1200px) {
+
+
+.moviePoster {
+
+   width: 60%;
+
+}
+
+#movieImgId { 
+
+  width: 90%;
+  margin-top:40px;
+}
+
+
+
+#container {
+
+  width: 100%;
+
+}
+
+.pour {
+  width: 5%;
+  left: 20%;
+}
+
+}
+
+
+
+/*
+@media (max-width: 996px) {
+
+.moviePoster {
+left: 50%;
+width: 60%;
+
+}
+
+
+#movieImgId { 
+  margin-top: 50px;
+}
+
+}*/
+
+@media (max-width: 992px) {
+
+.moviePoster {
+left: 30%;
+width: 70%;
+
+}
+
+
+#movieImgId { 
+  margin-top: 50px;
+}
+
+}
+
+
+
+@media (max-width: 480px) {
+
+.moviePoster {
+  width: 100%;
+}
+
+.beerResults {
+
+  display: block;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+=======
 #buttonWrapper {
   margin: 0 auto;
   text-align: center;
 }
+>>>>>>> master
