@@ -1,3 +1,4 @@
+
 /**
   * Brewery DB & OMDB app
   *
@@ -20,8 +21,8 @@ const beerToRating = {
 
   "Belgian Style White" : {
         beerStyleId: 65,
-        rating_min: 8.0,
-        rating_max: 7.6
+        rating_min: 7.6,
+        rating_max: 8.0
       },
 
   "American Style Lager" : {
@@ -96,20 +97,22 @@ var movieJax = function(movie, cb){
   var movieUrl = "http://www.omdbapi.com/?";//API key not necessary
   var movieParam = {
     t: movie,
+    plot: "full"
   };
   movieUrl += $.param(movieParam);
   $.ajax({url: movieUrl, method:"GET"})
     // response and call back are passed as arguments in done function
     .done(function(response) {
     //call movie detail function
+    console.log(response);
     var movieObj = {};
     //stored desired paramters in vars
-    	movieObj.title = response.Title;
-    	movieObj.posterURL = response.Poster;
-    	movieObj.plot = response.Plot;
-    	movieObj.rating = parseFloat(response.imdbRating);
-      brewJax(movieObj.rating, console.log);
-      cb(movieObj);
+  	movieObj.title = response.Title;
+  	movieObj.posterURL = response.Poster;
+  	movieObj.plot = response.Plot;
+  	movieObj.rating = parseFloat(response.imdbRating);
+    brewJax(movieObj.rating, createBeerDiv);
+    cb(movieObj);
   });
 }
 
@@ -139,6 +142,7 @@ let brewJax = function(rating, cb) {
   var breweryUrl = "http://api.brewerydb.com/v2/beers/?"; //this is the base, the API endpoint will need to be specified
   var breweryAPIKey = "a2bbeb0349946cb230fb7cc9a584a5a4";
   var beerObj = extractStyle(beerToRating, rating);
+  console.log(beerObj);
   var queryStyleId = beerObj.beerStyleId;
   var beerSearchParams = {
     key: breweryAPIKey,
@@ -157,6 +161,8 @@ let brewJax = function(rating, cb) {
     beerRes.labels = r.labels;
     styleRes = r.style;
     cb(beerRes, styleRes);
+    console.log(beerRes);
+    console.log(styleRes);
   })
 }
 
@@ -172,73 +178,133 @@ let brewJax = function(rating, cb) {
 
 $("#movieSubmit").on("click", function(event){
     event.preventDefault();
+
     var mov = $("#movieTitle").val().trim();
-    movieJax(mov, console.log);
+    movieJax(mov, createMovieDiv);
+    $('#results').removeClass('hide');
 });
 
 
 //Creating a div for the movie image
 function createMovieDiv (object){
-// Div is created to contain movie image and title
-  var movieDiv = $("<div>");
-  var movieDisplay = object.title;
+  // Div is created to contain movie image and title
+  var movieDiv = $(".movieResults");
   //New paragraph is created and displays the name of
-  var movieP = $("<p>").text(object.title);
-  var movieImg = $("<img>");
-  movieImg.attr("src", "alt", object.posterURL);
-  movieImg.attr("id", "movieImgId");
-  movieDiv.append(movieImg);
-  movieDiv.append(p);
+  var movieP = $("<h1>").addClass("col col-md-12")
+    .text(object.title);
+  //var moviePlotP = $("<p>")addClass("col col-md-12")
+    //.text(object.plot);
+  var movieImg = $("<img>").addClass("col col-md-12");
+  movieImg.attr("src", object.posterURL);
 
-  $(#results).append(movieDiv);
+  movieImg.attr("id", "movieImgId")
+    .data("plot", object.plot);
+  movieDiv.append(movieImg)
+    .append(movieP)
+    //.append(moviePlotP)
+    .insertBefore($("#buttonWrapper"));
 
 
 };
 
 //Creating a div for the beer image
-function createBeerDiv (object){
-// Div is created to contain beer image and title
-  var beerDiv = $("<div>");
-  var beerDisplay = object.title;
-  var beerP = $("<p>").text(object.title);
-  var beerImg = $("<img>");
+function createBeerDiv(beerObj, styleObj){
+  // Div is created to contain beer image and title
 
-  beerImg.attr("src", "alt", object.posterURL);
-  beerImg.attr("id", "beerImgId");
-  beerDiv.append(beerImg);
-  beerDiv.append(p);
+  $("#beerAnimationId").removeClass("hide");
+  $('.searchA').removeClass('hide');
 
-  $(#results).append(beerDiv);
+  var beerDiv = $("<div>").addClass("col col-md-6")
+    .append($("#beerAnimationId"))
+    .data("description", styleObj.description)
+    .attr("id", "beerImgId");
+
+  var beerP = $("<h1>").addClass("col col-md-12 beerTitle")
+    .text(styleObj.name);
+
+  $("#wrapper").addClass("hide");
 
 
+  beerDiv.append(beerP)
+    // beerDiv.append(beerDesc)
+    beerDiv.insertBefore($("#buttonWrapper"));
 };
 //Movie IMG onclick function
-$("#movieImgId").on("click", "img", function(object) {
-  $("#results").empty();
-  var movieInfoDiv = $("<div>");
-  var movieName = $(<h1>).text(object.title);
-  var movieDescription = $("<p>").text(object.plot);
 
-  movieInfoDiv.append(movieName);
-  movieInfoDiv.append(movieDescription);
 
-  $(#results).append(movieInfoDiv);
+$("#results").on("click", "img", function(object) {
+   var modal = new tingle.modal({
+     footer: false,
+     stickyFooter: false,
+     closeLabel: "Close",
+     cssClass: ['custom-class-1', 'custom-class-2'],
+     onOpen: function() {
+         console.log('modal open');
+     },
+     onClose: function() {
+         console.log('modal closed');
+     },
+     beforeClose: function() {
+         // here's goes some logic
+         // e.g. save content before closing the modal
+         return true; // close the modal
+     	return false; // nothing happens
+     }
+ });
 
-};
+ // set content
+ modal.setContent($(this).data('plot'));
+
+
+
+ // open modal
+ modal.open();
+});
+
+
 
 //Beer IMG onclick function
-$("#beerImgId").on("click", "img", function(object) {
-  $("#results").empty();
-  var beerInfoDiv = $("<div>");
-  var beerName = $(<h1>).text(object.style);
-  var beerDescription = $("<p>").text(object.description);
-  var beerRecommendation = $("<p>").text("We recommend" + beerName);
+$("#beerAnimationId").on("click", function(object) {
+  var modal = new tingle.modal({
+    footer: false,
+    stickyFooter: false,
+    closeLabel: "Close",
+    cssClass: ['custom-class-1', 'custom-class-2'],
+    onOpen: function() {
+        console.log('modal open');
+    },
+    onClose: function() {
+        console.log('modal closed');
+    },
+    beforeClose: function() {
+        // here's goes some logic
+        // e.g. save content before closing the modal
+        return true; // close the modal
+     return false; // nothing happens
+    }
+  });
+
+  // set content
+  modal.setContent($('#beerImgId').data('description'));
+
+  // open modal
+  modal.open();
+  });
 
 
-  beerInfoDiv.append(beerName);
-  beerInfoDiv.append(beerDescription);
-  beerInfoDiv.append(beerRecommendation);
 
-  $(#results).append(beerInfoDiv);
+$('.searchA').on("click", function() {
+  $('.movieResults').empty();
+  $('.beerResults').empty();
+  $(".beerTitle").remove();
+  $("#results").addClass('hide');
+  $("#wrapper").removeClass('hide');
+  resetBeer();
+});
 
+function resetBeer() {
+  $('.pour').css('height', '0px');
+  $('#liquid').css('height', '0px');
+  $('.beer-foam').css('bottom', '10px');
+  $('.pour').css('display', 'block');
 };

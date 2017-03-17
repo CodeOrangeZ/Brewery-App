@@ -1,7 +1,35 @@
+  // Initialize Firebase
+var config = {
+  apiKey: "AIzaSyDsN9OBXcqgiddpfHFD-uuC_Gxx3qL_OUU",
+  authDomain: "beer-app-b9dbc.firebaseapp.com",
+  databaseURL: "https://beer-app-b9dbc.firebaseio.com",
+  storageBucket: "beer-app-b9dbc.appspot.com",
+  messagingSenderId: "957529002078"
+};
+firebase.initializeApp(config);
+
+var dataRef = firebase.database();
+
+//Initialize Values
+
+var over21 = 0;
+var under21 = 0;
+
+dataRef.ref().on("value", function(snapshot) {
+  //console.log value of snapshot
+  console.log(snapshot.val());
+
+  over21 = snapshot.val().over21;
+  under21 = snapshot.val().under21;
+});
+
+
+
 $(document).ready(function() {
 
 
   $(".contentDiv").addClass("hide");
+  $("#beerAnimationId").addClass("hide");
 
 
   // instanciate new modal 'are you 21?'
@@ -29,6 +57,13 @@ $(document).ready(function() {
 
   // add a button
   modal.addFooterBtn('Yes', 'yesBtn tingle-btn tingle-btn--primary', function() {
+     // Code for the push
+     over21++
+      firebase.database().ref().set({
+        under21: under21,
+        over21: over21
+      });
+
       // here goes some logic
       modal.close();
       $(".contentDiv").removeClass("hide");
@@ -77,7 +112,13 @@ $(document).ready(function() {
       // here goes some logic
       modal.close();
       $(".not21").removeClass('hide');
-      
+//Code for Firebase Push
+      under21++;
+      firebase.database().ref().set({
+        over21: over21,
+        under21: under21
+      });
+
   });
 
   // open modal
@@ -91,6 +132,3 @@ $(document).ready(function() {
 
 
 //function to fade in the second half of title
-
-
-
