@@ -182,15 +182,25 @@ $("#movieSubmit").on("click", function(event){
 
 //Creating a div for the movie image
 function createMovieDiv (object){
+
+$(".moviePoster").append(movieImg);
+
+
+$(".movieTitle").append(movieP);
+
+
   // Div is created to contain movie image and title
-  var movieDiv = $("<div>").addClass("col col-md-6");
+  // var movieDiv = $("<div>").addClass("col col-md-6");
   //New paragraph is created and displays the name of
-  var movieP = $("<p>").addClass("col col-md-12")
+  var movieP = $("<h2>")
     .text(object.title);
+
+  $(".movieTitle").append(movieP);
   //var moviePlotP = $("<p>")addClass("col col-md-12")
     //.text(object.plot);
-  var movieImg = $("<img>").addClass("col col-md-12");
+  var movieImg = $("<img>");
   movieImg.attr("src", object.posterURL);
+  $(".moviePoster").append(movieImg);
 
   movieImg.attr("id", "movieImgId")
     .data("plot", object.plot);
@@ -208,16 +218,19 @@ function createBeerDiv(styleObj, beerObj){
 
   $("#beerAnimationId").removeClass("hide");
 
-  var beerDiv = $("<div>").addClass("col col-md-6")
-    .append($("#beerAnimationId"))
-    .attr("id", "beerImgId");
+  // var beerDiv = $("<div>")
+  //   .append($("#beerAnimationId"))
+  //   .attr("id", "beerImgId");
 
 
-  var beerP = $("<p>").addClass("col col-md-12")
+  var beerP = $("<h2>")
     .text(styleObj.name);
 
-  var beerDesc = $("<p>").addClass("col col-md-12")
-    .text(styleObj.description);
+  $(".beerTitle").append(beerP);
+
+
+  // var beerDesc = $("<p>").addClass("col col-md-12")
+  //   .text(styleObj.description);
 
   $("#wrapper").addClass("hide");
 
