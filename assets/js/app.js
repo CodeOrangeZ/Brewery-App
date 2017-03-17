@@ -297,4 +297,12 @@ $('.searchA').on("click", function() {
   $(".beerTitle").remove();
   $("#results").addClass('hide');
   $("#wrapper").removeClass('hide');
+  resetBeer();
 });
+
+function resetBeer() {
+  $('.pour').css('height', '0px');
+  $('#liquid').css('height', '0px');
+  $('.beer-foam').css('bottom', '10px');
+  $('.pour').css('display', 'block');
+};
