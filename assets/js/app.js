@@ -200,7 +200,7 @@ function createMovieDiv (object){
   movieDiv.append(movieImg)
     .append(movieP)
     //.append(moviePlotP)
-    .appendTo($("#results"));
+    .insertBefore($("#buttonWrapper"));
 
 
 };
@@ -217,7 +217,7 @@ function createBeerDiv(beerObj, styleObj){
     .data("description", styleObj.description)
     .attr("id", "beerImgId");
 
-  var beerP = $("<h1>").addClass("col col-md-12")
+  var beerP = $("<h1>").addClass("col col-md-12 beerTitle")
     .text(styleObj.name);
 
   $("#wrapper").addClass("hide");
@@ -225,7 +225,7 @@ function createBeerDiv(beerObj, styleObj){
 
   beerDiv.append(beerP)
     // beerDiv.append(beerDesc)
-    beerDiv.appendTo($("#results"));
+    beerDiv.insertBefore($("#buttonWrapper"));
 };
 //Movie IMG onclick function
 
@@ -294,6 +294,7 @@ $("#beerAnimationId").on("click", function(object) {
 $('.searchA').on("click", function() {
   $('.movieResults').empty();
   $('.beerResults').empty();
+  $(".beerTitle").remove();
   $("#results").addClass('hide');
   $("#wrapper").removeClass('hide');
 });
