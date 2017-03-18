@@ -146,8 +146,10 @@ width: 100%;
 /*  width: 348px;*/
 }
 
-#container div { 
-  position: absolute; 
+
+#container div {
+  position: absolute;
+
 }
 
 .container2 {
@@ -610,12 +612,11 @@ width: 100%;
 
 
 /*.moviePoster {
-
    width: 60%;
-
 }*/
 
-/*#movieImgId { 
+
+/*#movieImgId {
 
   width: 50%;
   margin-top:40px;
@@ -696,7 +697,6 @@ width: 100%;
 
 
 /*
-
 
 #buttonWrapper {
   margin: 0 auto;

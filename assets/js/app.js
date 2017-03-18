@@ -200,7 +200,9 @@ let brewJax = function(rating, cb) {
     $("#liquid").addClass("stout")
     $(".pour").addClass("stout")
     $(".foam").addClass("stout")
-  }; 
+
+  };
+
   //send request to breweryDB for specific beer style.
   breweryUrl += $.param(beerSearchParams);
   proxyCall(breweryUrl).done(function(res){
