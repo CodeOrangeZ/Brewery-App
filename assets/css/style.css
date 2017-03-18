@@ -7,6 +7,9 @@ body {
   background-position:center;
 }
 
+/*div {
+  border: 1px solid green;
+}*/
 
 /*MODAL CSS*/
 .tingle-btn--primary {
@@ -44,8 +47,12 @@ body {
 }
 
 .tingle-modal-box__content {
-    text-align: center;
+/*    text-align: center;*/
 
+}
+
+.firstModal {
+  text-align: center;
 }
 
 /*END OF MODAL CSS*/
@@ -100,6 +107,11 @@ width: 100%;
 
 }
 
+
+.searchA {
+  margin-top: 50px;
+}
+
 /*Placeholder Text Italicized*/
 .form-control::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     font-style: italic;
@@ -120,16 +132,6 @@ width: 100%;
 
 .imageDiv { margin-top:25px; }
 
-/*MEDIA QUERIES*/
-
-@media (max-width: 992px) {
-  #movieImg {
-   width: 65%;
- }
-}
-
-
-
 
 
 /*beer pour css*/
@@ -144,7 +146,9 @@ width: 100%;
 /*  width: 348px;*/
 }
 
-#container div { position: absolute; }
+#container div { 
+  position: absolute; 
+}
 
 .container2 {
   display: block;
@@ -156,7 +160,7 @@ width: 100%;
 
 .pour {
   position: absolute;
-  left: 39%;
+  left: 80px;
   width: 20px;
   height: 0px;
   background-color: #ff9d06;
@@ -562,7 +566,12 @@ width: 100%;
     background-color: #fff;
 }
 
-<<<<<<< HEAD
+/*SEARCH AGAIN BUTTON*/
+
+.searchAgain {
+  text-align: center;
+}
+
 
 
 .beerResults {
@@ -578,18 +587,21 @@ width: 100%;
 }
 
 #movieImgId {
-  left: 45%; 
-  width: 45%;
-  margin-top:30px;
+
+  margin-top:45px;
+  float: right;
+  max-width: 40%;
 
 }
 
 .movieTitle {
   color: white;
+  text-align: right;
 }
 
 .beerTitle {
-margin-left: 15px;
+  margin-left: 15px;
+  color: white;
 
 }
 
@@ -597,17 +609,17 @@ margin-left: 15px;
 @media (max-width: 1200px) {
 
 
-.moviePoster {
+/*.moviePoster {
 
    width: 60%;
 
-}
+}*/
 
-#movieImgId { 
+/*#movieImgId { 
 
-  width: 90%;
+  width: 50%;
   margin-top:40px;
-}
+}*/
 
 
 
@@ -624,39 +636,35 @@ margin-left: 15px;
 
 }
 
-
-
-/*
-@media (max-width: 996px) {
-
-.moviePoster {
-left: 50%;
-width: 60%;
-
-}
-
-
-#movieImgId { 
-  margin-top: 50px;
-}
-
-}*/
-
 @media (max-width: 992px) {
 
-.moviePoster {
-left: 30%;
-width: 70%;
-
+.beerTitle {
+    text-align: center;
 }
 
+.movieTitle {
+    text-align: center;
+}
 
-#movieImgId { 
-  margin-top: 50px;
+#movieImgId {
+  float: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#movieImg { width: 75% }
+
+#beaker {
+  left: 30%;
+}
+
+.pour {
+
+  left: 40%;
 }
 
 }
-
 
 
 @media (max-width: 480px) {
@@ -670,6 +678,14 @@ width: 70%;
   display: block;
 }
 
+#movieImg {
+  width: 70%;
+}
+
+#beaker {
+  left: 15%;
+}
+
 }
 
 
@@ -679,11 +695,11 @@ width: 70%;
 
 
 
+/*
 
 
-=======
 #buttonWrapper {
   margin: 0 auto;
   text-align: center;
 }
->>>>>>> master
+*/

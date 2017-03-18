@@ -37,7 +37,7 @@ $(document).ready(function() {
       footer: true,
       stickyFooter: false,
       closeLabel: "Close",
-      cssClass: ['custom-class-1', 'custom-class-2'],
+      cssClass: ['custom-class-1', 'custom-class-2', 'firstModal'],
       onOpen: function() {
           console.log('modal open');
       },
