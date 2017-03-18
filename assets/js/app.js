@@ -1,96 +1,3 @@
-$(document).ready(function() {
-
-  $(".contentDiv").addClass("hide");
-  $(".beaker").addClass("hide");
-
-
-  // instanciate new modal 'are you 21?'
-  var modal = new tingle.modal({
-      footer: true,
-      stickyFooter: false,
-      closeLabel: "Close",
-      cssClass: ['custom-class-1', 'custom-class-2'],
-      onOpen: function() {
-          console.log('modal open');
-      },
-      onClose: function() {
-          console.log('modal closed');
-      },
-      beforeClose: function() {
-          // here's goes some logic
-          // e.g. save content before closing the modal
-          return true; // close the modal
-        return false; // nothing happens
-      }
-  });
-
-  // set content
-  modal.setContent('<h1>Are you 21 years of age or older?</h1>');
-
-  // add a button
-  modal.addFooterBtn('Yes', 'yesBtn tingle-btn tingle-btn--primary', function() {
-      // here goes some logic
-      modal.close();
-      $(".contentDiv").removeClass("hide");
-
-      var audio = document.getElementsByTagName("audio")[0];
-      audio.play();
-
-
-
-        var fill=document.querySelector(".water-fill");
-        TweenMax.fromTo(fill,0.8,{
-          attr:{
-            x:-400
-          }
-        },
-        {
-          attr:{
-            x:0,
-          },
-
-          repeat:-1,
-          ease:Linear.easeNone
-        });
-
-        TweenMax.fromTo(fill,10,{
-          attr:{
-            y:120,
-            height:0
-          },
-        },{
-          attr:{
-            y:7,
-            height:140
-          },
-          repeat: 0,
-          yoyo:true,
-          ease:Linear.easeNone
-        });
-
-
-
-  });
-
-  // add another button
-  modal.addFooterBtn('No', 'tingle-btn tingle-btn--danger', function() {
-      // here goes some logic
-      modal.close();
-      console.log("you're not 21");
-      $(".not21").removeClass('hide');
-      
-  });
-
-  // open modal
-  modal.open();
-
-});
-
-
-
-
-
-
 
 /**
   * Brewery DB & OMDB app
@@ -114,8 +21,8 @@ const beerToRating = {
 
   "Belgian Style White" : {
         beerStyleId: 65,
-        rating_min: 8.0,
-        rating_max: 7.6
+        rating_min: 7.6,
+        rating_max: 8.0
       },
 
   "American Style Lager" : {
@@ -197,19 +104,15 @@ var movieJax = function(movie, cb){
     // response and call back are passed as arguments in done function
     .done(function(response) {
     //call movie detail function
+    console.log(response);
     var movieObj = {};
     //stored desired paramters in vars
-    	movieObj.title = response.Title;
-    	movieObj.posterURL = response.Poster;
-    	movieObj.plot = response.Plot;
-    	movieObj.rating = parseFloat(response.imdbRating);
-<<<<<<< HEAD
-      console.log(movieObj);
-      brewJax(movieObj.rating, console.log);
-=======
-      brewJax(movieObj.rating, createBeerDiv);
->>>>>>> 45f31a37d70893e1e89419623b3bab5422949cc9
-      cb(movieObj);
+  	movieObj.title = response.Title;
+  	movieObj.posterURL = response.Poster;
+  	movieObj.plot = response.Plot;
+  	movieObj.rating = parseFloat(response.imdbRating);
+    brewJax(movieObj.rating, createBeerDiv);
+    cb(movieObj);
   });
 }
 
@@ -239,6 +142,7 @@ let brewJax = function(rating, cb) {
   var breweryUrl = "http://api.brewerydb.com/v2/beers/?"; //this is the base, the API endpoint will need to be specified
   var breweryAPIKey = "a2bbeb0349946cb230fb7cc9a584a5a4";
   var beerObj = extractStyle(beerToRating, rating);
+  console.log(beerObj);
   var queryStyleId = beerObj.beerStyleId;
   var beerSearchParams = {
     key: breweryAPIKey,
@@ -257,6 +161,8 @@ let brewJax = function(rating, cb) {
     beerRes.labels = r.labels;
     styleRes = r.style;
     cb(beerRes, styleRes);
+    console.log(beerRes);
+    console.log(styleRes);
   })
 }
 
@@ -272,22 +178,19 @@ let brewJax = function(rating, cb) {
 
 $("#movieSubmit").on("click", function(event){
     event.preventDefault();
-    $("#wrapper").addClass("hide");
-        $(".beaker").removeClass("hide");
-        // $("#liquid").addClass("stout");
-        // $(".pour").addClass("stout");
-        // $(".foam").addClass("stout");
+
     var mov = $("#movieTitle").val().trim();
     movieJax(mov, createMovieDiv);
+    $('#results').removeClass('hide');
 });
 
 
 //Creating a div for the movie image
 function createMovieDiv (object){
-// Div is created to contain movie image and title
-  var movieDiv = $("<div>").addClass("col col-md-6");
+  // Div is created to contain movie image and title
+  var movieDiv = $(".movieResults");
   //New paragraph is created and displays the name of
-  var movieP = $("<p>").addClass("col col-md-12")
+  var movieP = $("<h1>").addClass("col col-md-12")
     .text(object.title);
   //var moviePlotP = $("<p>")addClass("col col-md-12")
     //.text(object.plot);
@@ -299,33 +202,39 @@ function createMovieDiv (object){
   movieDiv.append(movieImg)
     .append(movieP)
     //.append(moviePlotP)
-    .appendTo($("#results"));
+    .insertBefore($("#buttonWrapper"));
 
 
 };
 
 //Creating a div for the beer image
-function createBeerDiv(styleObj, beerObj){
-// Div is created to contain beer image and title
+function createBeerDiv(beerObj, styleObj){
+  // Div is created to contain beer image and title
 
-  var beerDiv = $("<div>").addClass("col col-md-6");
-  var beerP = $("<p>").addClass("col col-md-12")
+  $("#beerAnimationId").removeClass("hide");
+  $('.searchA').removeClass('hide');
+
+  var beerDiv = $("<div>").addClass("col col-md-6")
+    .append($("#beerAnimationId"))
+    .data("description", styleObj.description)
+    .attr("id", "beerImgId");
+
+  var beerP = $("<h1>").addClass("col col-md-12 beerTitle")
     .text(styleObj.name);
-  var beerDesc = $("<p>").addClass("col col-md-12")
-  .text(styleObj.description);
 
-  //var beerImg = $("<img>");
+  $("#wrapper").addClass("hide");
 
-  //beerImg.attr("src", object.posterURL);
-  beerDiv.attr("id", "beerImgId");
+
   beerDiv.append(beerP)
-    .append(beerDesc)
-    .appendTo($("#results"));
+    // beerDiv.append(beerDesc)
+    beerDiv.insertBefore($("#buttonWrapper"));
 };
 //Movie IMG onclick function
+
+
 $("#results").on("click", "img", function(object) {
    var modal = new tingle.modal({
-     footer: true,
+     footer: false,
      stickyFooter: false,
      closeLabel: "Close",
      cssClass: ['custom-class-1', 'custom-class-2'],
@@ -346,43 +255,56 @@ $("#results").on("click", "img", function(object) {
  // set content
  modal.setContent($(this).data('plot'));
 
- // add another button
- modal.addFooterBtn('X', 'tingle-btn tingle-btn--danger', function() {
-     // here goes some logic
-     modal.close();
- });
+
 
  // open modal
  modal.open();
 });
+
+
+
 //Beer IMG onclick function
-$("#beerImgId").on("click", "img", function(object) {
-  $("#results").empty();
-  var beerInfoDiv = $("<div>");
-  var beerName = $("<h1>").text(object.style);
-  var beerDescription = $("<p>").text(object.description);
-  var beerRecommendation = $("<p>").text("We recommend: " + beerName);
+$("#beerAnimationId").on("click", function(object) {
+  var modal = new tingle.modal({
+    footer: false,
+    stickyFooter: false,
+    closeLabel: "Close",
+    cssClass: ['custom-class-1', 'custom-class-2'],
+    onOpen: function() {
+        console.log('modal open');
+    },
+    onClose: function() {
+        console.log('modal closed');
+    },
+    beforeClose: function() {
+        // here's goes some logic
+        // e.g. save content before closing the modal
+        return true; // close the modal
+     return false; // nothing happens
+    }
+  });
+
+  // set content
+  modal.setContent($('#beerImgId').data('description'));
+
+  // open modal
+  modal.open();
+  });
 
 
-  beerInfoDiv.append(beerName);
-  beerInfoDiv.append(beerDescription);
-  beerInfoDiv.append(beerRecommendation);
 
-  $("#results").append(beerInfoDiv);
-
+$('.searchA').on("click", function() {
+  $('.movieResults').empty();
+  $('.beerResults').empty();
+  $(".beerTitle").remove();
+  $("#results").addClass('hide');
+  $("#wrapper").removeClass('hide');
+  resetBeer();
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function resetBeer() {
+  $('.pour').css('height', '0px');
+  $('#liquid').css('height', '0px');
+  $('.beer-foam').css('bottom', '10px');
+  $('.pour').css('display', 'block');
+};

@@ -29,6 +29,7 @@ $(document).ready(function() {
 
 
   $(".contentDiv").addClass("hide");
+  $("#beerAnimationId").addClass("hide");
 
 
   // instanciate new modal 'are you 21?'
@@ -61,7 +62,7 @@ $(document).ready(function() {
       firebase.database().ref().set({
         under21: under21,
         over21: over21
-      });    
+      });
 
       // here goes some logic
       modal.close();
@@ -117,7 +118,7 @@ $(document).ready(function() {
         over21: over21,
         under21: under21
       });
-      
+
   });
 
   // open modal
@@ -131,6 +132,3 @@ $(document).ready(function() {
 
 
 //function to fade in the second half of title
-
-
-
