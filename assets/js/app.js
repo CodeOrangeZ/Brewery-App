@@ -149,6 +149,58 @@ let brewJax = function(rating, cb) {
     order: "random",
     styleId: queryStyleId,
   };
+
+  if (queryStyleId === 30) {
+    $("#liquid").addClass("ipa")
+    $(".pour").addClass("ipa")
+    $(".foam").addClass("ipa")
+  }
+  if (queryStyleId === 97) {
+    $("#liquid").addClass("premium")
+    $(".pour").addClass("premium")
+    $(".foam").addClass("premium")
+  }
+
+  if (queryStyleId === 48) {
+    $("#liquid").addClass("hef")
+    $(".pour").addClass("hef")
+    $(".foam").addClass("hef")
+  }
+ if (queryStyleId === 65) {
+    $("#liquid").addClass("white")
+    $(".pour").addClass("white")
+    $(".foam").addClass("white")
+  }
+ if (queryStyleId === 93) {
+    $("#liquid").addClass("lager")
+    $(".pour").addClass("lager")
+    $(".foam").addClass("lager")
+  }
+ if (queryStyleId === 22) {
+    $("#liquid").addClass("redale")
+    $(".pour").addClass("redale")
+    $(".foam").addClass("redale")
+  }
+ if (queryStyleId === 25) {
+    $("#liquid").addClass("pale")
+    $(".pour").addClass("pale")
+    $(".foam").addClass("pale")
+  }
+ if (queryStyleId === 100) {
+    $("#liquid").addClass("malt")
+    $(".pour").addClass("malt")
+    $(".foam").addClass("malt")
+  }
+ if (queryStyleId === 31) {
+    $("#liquid").addClass("dipa")
+    $(".pour").addClass("dipa")
+    $(".foam").addClass("dipa")
+  }
+ if (queryStyleId === 43) {
+    $("#liquid").addClass("stout")
+    $(".pour").addClass("stout")
+    $(".foam").addClass("stout")
+  }; 
   //send request to breweryDB for specific beer style.
   breweryUrl += $.param(beerSearchParams);
   proxyCall(breweryUrl).done(function(res){
@@ -182,6 +234,7 @@ $("#movieSubmit").on("click", function(event){
     var mov = $("#movieTitle").val().trim();
     movieJax(mov, createMovieDiv);
     $('#results').removeClass('hide');
+
 });
 
 
@@ -195,15 +248,15 @@ $(".movieTitle").append(movieP);
 
 
   // Div is created to contain movie image and title
-<<<<<<< HEAD
+// <<<<<<< HEAD
   // var movieDiv = $("<div>").addClass("col col-md-6");
   //New paragraph is created and displays the name of
-  var movieP = $("<h2>")
-=======
+
+// =======
   var movieDiv = $(".movieResults");
   //New paragraph is created and displays the name of
-  var movieP = $("<h1>").addClass("col col-md-12")
->>>>>>> master
+  var movieP = $("<h1>").addClass("col col-md-12 movieTitle")
+// >>>>>>> master
     .text(object.title);
 
   $(".movieTitle").append(movieP);
@@ -211,6 +264,7 @@ $(".movieTitle").append(movieP);
     //.text(object.plot);
   var movieImg = $("<img>");
   movieImg.attr("src", object.posterURL);
+  movieImg.attr("class", "img-responsive");
   $(".moviePoster").append(movieImg);
 
   movieImg.attr("id", "movieImgId")
@@ -230,23 +284,23 @@ function createBeerDiv(beerObj, styleObj){
   $("#beerAnimationId").removeClass("hide");
   $('.searchA').removeClass('hide');
 
-<<<<<<< HEAD
-  // var beerDiv = $("<div>")
-  //   .append($("#beerAnimationId"))
-  //   .attr("id", "beerImgId");
+// <<<<<<< HEAD
+//   // var beerDiv = $("<div>")
+//   //   .append($("#beerAnimationId"))
+//   //   .attr("id", "beerImgId");
 
 
-  var beerP = $("<h2>")
-    .text(styleObj.name);
+//   var beerP = $("<h2>")
+//     .text(styleObj.name);
 
-  $(".beerTitle").append(beerP);
+//   $(".beerTitle").append(beerP);
 
 
-  // var beerDesc = $("<p>").addClass("col col-md-12")
-  //   .text(styleObj.description);
+//   // var beerDesc = $("<p>").addClass("col col-md-12")
+//   //   .text(styleObj.description);
 
-=======
-  var beerDiv = $("<div>").addClass("col col-md-6")
+// =======
+  var beerDiv = $(".beerResults")
     .append($("#beerAnimationId"))
     .data("description", styleObj.description)
     .attr("id", "beerImgId");
@@ -254,7 +308,7 @@ function createBeerDiv(beerObj, styleObj){
   var beerP = $("<h1>").addClass("col col-md-12 beerTitle")
     .text(styleObj.name);
 
->>>>>>> master
+// >>>>>>> master
   $("#wrapper").addClass("hide");
 
 
@@ -318,7 +372,11 @@ $("#beerAnimationId").on("click", function(object) {
   });
 
   // set content
-  modal.setContent($('#beerImgId').data('description'));
+  modal.setContent(
+    $('#beerImgId').data('description')
+
+
+    );
 
   // open modal
   modal.open();
@@ -328,7 +386,8 @@ $("#beerAnimationId").on("click", function(object) {
 
 $('.searchA').on("click", function() {
   $('.movieResults').empty();
-  $('.beerResults').empty();
+  // $('.beerResults').empty();
+
   $(".beerTitle").remove();
   $("#results").addClass('hide');
   $("#wrapper").removeClass('hide');
@@ -340,4 +399,10 @@ function resetBeer() {
   $('#liquid').css('height', '0px');
   $('.beer-foam').css('bottom', '10px');
   $('.pour').css('display', 'block');
+
+  $("#liquid").removeClass("redale stout dipa malt pale white hef premium lager ipa")
+  $(".pour").removeClass("redale stout dipa malt pale white hef premium lager ipa")
+  $(".foam").removeClass("redale stout dipa malt pale white hef premium lager ipa")
+
+
 };
